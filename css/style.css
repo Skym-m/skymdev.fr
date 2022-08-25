@@ -1,0 +1,448 @@
+@charset "UTF-8";
+
+@import url("https://fonts.googleapis.com/css?family=Libre+Franklin:400,700&subset=latin");
+body {
+  min-height: 100vh;
+  display: grid;
+  grid: 100vh/1fr;
+  place-items: center;
+}
+
+h1 {
+  font: 10vmin/0.8 "Libre Franklin";
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  color: #fff4;
+  text-shadow: 0 0 5px #fff;
+  mix-blend-mode: overlay;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Font */
+
+@font-face {
+    font-family: "termina";
+    src: url("/fonts/termina.woff2") format("woff2"),
+           url("/fonts/termina.woff") format("woff");
+}
+
+/* Separateur */
+
+.separator {
+    text-align: center;
+    width: 75%;
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+    color: #bbbbbb;
+    height: 3px !important;
+    border-radius: 100%;
+    opacity: 1;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+    width: 1px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #33ddffd5;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #33DDFF;
+}
+
+
+/* Navbar */
+
+nav {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: right;
+    justify-content: right;
+    -webkit-box-align: right;
+    align-items: center;
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    padding-top: 10px;
+    height: 50px;
+    background-color: #b9b3a9;
+    top: 0px;
+    font-family: 'Poppins';
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav #list {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: right;
+    align-items: right;
+    height: 0;
+}
+
+nav #list li a {
+    color: black;
+    list-style-type: none;
+    border-radius: 20px;
+    font-size: 1em;
+    padding: 5px;
+    transition: 1s;
+}
+
+nav #list li a:hover {
+    color: rgb(58, 58, 58);
+    border-radius: 20px;
+    font-size: 1.5em;
+    box-shadow: 0px 0px 10px rgb(58, 58, 58);
+    transition: 1s;
+}
+
+nav #list li {
+    text-align: right;
+}
+
+nav li:nth-child(1) {
+    margin-right: 15px;
+}
+
+nav li:nth-child(2) {
+    margin-right: 15px;
+}
+
+nav li:nth-child(3) {
+    margin-right: 100px;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+}
+
+a,
+a:link,
+a:visited,
+a:hover {
+    text-decoration: none;
+}
+
+/* SkymDev Portfolio */
+
+#welcome {
+    background-color: #b9b3a9;
+}
+
+.welcome {
+    padding-top: 350px;
+    padding-bottom: 250px;
+}
+
+#container {
+	width: 100vw;
+	height: 80pt;
+	top: 0;
+	bottom: 0;
+	filter: url(#threshold) blur(0.6px);
+}
+
+#text1, #text2 {
+    position: absolute;
+	width: 100%;
+	display: inline-block;
+	font-size: 80pt;
+	text-align: center;
+	user-select: none;
+}
+
+/* A propos -/- about */
+
+.about {
+    padding-top: 150px;
+    padding-left: 300px;
+    padding-bottom: 200px;
+}
+
+.about h1 {
+    color: #000000	;
+    font-family: 'Tinos', bold;
+    font-weight: bold;
+    font-size: 160px;
+    margin-bottom: 0px;
+}
+
+.about h2 {
+    color: #000000;
+    font-family: 'Tinos', bold;
+    font-weight: bold;
+    font-size: 50px;
+    margin-top: 0px;
+}
+
+.about h4 {
+    color: #252525;
+    font-family: 'Poppins';
+    font-weight: 500;
+    transition: 500ms;
+    font-size: 30px;
+}
+
+.about-classe {
+    font-weight: bold;
+}
+
+.about-pays {
+    font-weight: bold;
+}
+
+.about-pays:hover {
+    background: linear-gradient(90deg, rgba(0,31,255,1) 0%, rgb(255, 206, 206) 50%, rgba(255,0,0,1) 100%);
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about a {
+    text-decoration: none;
+    transition: 500ms;
+    color: white;
+    padding-bottom: 50px;
+}
+
+.about a:hover {
+    border: none;
+    border-radius: 23px;
+    padding: 0px 30px;
+    height: 36px;
+    color: white;
+    box-shadow: 2px 2px black;
+    background-color: #f2ce58c2;
+    transition: 500ms;
+}
+
+/* Skym-Mc -/- skym-mc */
+
+.skym-mc {
+    padding-top: 150px;
+    padding-left: 300px;
+    padding-bottom: 200px;
+}
+
+.skym-mc h1 {
+    color: #000000	;
+    font-family: 'Tinos', bold;
+    font-weight: bold;
+    font-size: 160px;
+}
+
+.skym-mc h2 {
+    color: #000000;
+    font-family: 'Tinos', bold;
+    font-weight: bold;
+}
+
+.skym-mc h4 {
+    color: #000000;
+    font-family: 'Tinos';
+    transition: 500ms;
+}
+
+.skym-mc-serveurs {
+    font-weight: bold;
+}
+
+.skym-mc a {
+    text-decoration: none;
+    transition: 500ms;
+    color: orange;
+}
+
+.skym-mc a:hover {
+    border: none;
+    border-radius: 23px;
+    padding: 0px 30px;
+    height: 36px;
+    color: white;
+    box-shadow: 2px 2px 
+    black;
+    background-color: #f2ce58c2;
+    transition: 500ms;
+}
+
+/* Mes services -/- services */
+
+.services {
+    padding-top: 150px;
+    padding-left: 300px;
+    padding-bottom: 200px;
+}
+
+.services h1 {
+    color: #000000	;
+    font-family: 'Tinos', bold;
+    font-weight: bold;
+    font-size: 160px;
+}
+
+.services h2 {
+    color: #000000;
+    font-family: 'Tinos', bold;
+    font-weight: bold;
+}
+
+.services h4 {
+    color: #000000;
+    font-family: 'Tinos';
+    transition: 500ms;
+}
+
+.services a {
+    text-decoration: none;
+    transition: 500ms;
+    color: orange;
+}
+
+.services a:hover {
+    border: none;
+    border-radius: 23px;
+    padding: 0px 30px;
+    height: 36px;
+    color: white;
+    box-shadow: 2px 2px 
+    black;
+    background-color: #f2ce58c2;
+    transition: 500ms;
+}
+
+/* Développement -/- dev */
+
+.dev {
+    padding-top: 150px;
+    padding-left: 300px;
+    padding-bottom: 200px;
+}
+
+.dev h1 {
+    color: #000000	;
+    font-family: 'Tinos', bold;
+    font-weight: bold;
+    font-size: 160px;
+}
+
+.dev h2 {
+    color: #000000;
+    font-family: 'Tinos', bold;
+    font-weight: bold;
+}
+
+.dev h4 {
+    color: #000000;
+    font-family: 'Tinos';
+    transition: 500ms;
+}
+
+.dev a {
+    text-decoration: none;
+    transition: 500ms;
+    color: orange;
+}
+
+.dev a:hover {
+    border: none;
+    border-radius: 23px;
+    padding: 0px 30px;
+    height: 36px;
+    color: white;
+    box-shadow: 2px 2px 
+    black;
+    background-color: #f2ce58c2;
+    transition: 500ms;
+}
+
+/* Footer */
+
+.footerChild {
+    text-align: center;
+    color: #fff;
+    font-family: 'Poppins';
+}
+
+.footerChild a {
+    text-align: center;
+    color: #fff;
+    transition: 0.5s;
+}
+
+.footerChild a:hover {
+    text-align: center;
+    color: rgb(107, 107, 107);
+    transition: 0.5s;
+}
+
+/* Animations */
+
+@keyframes come-slide-zoom {
+    0% {
+        filter: opacity(0%);
+        transform: translate(0px, 10px);
+    }
+
+    50% {
+        filter: opacity(100%);
+        transform: translate(0px, 10px);
+    }
+
+    100% {
+        filter: opacity(100%);
+        transform: scale(150%);
+        transform: translate(0px, -270px);
+    }
+}
+
+@keyframes zoom {
+    0% {
+        filter: opacity(0%);
+        transform: scale(0%);
+        transform: translate(0px, 0px);
+    }
+
+    50% {
+        filter: opacity(100%);
+        transform: scale(100%);
+        transform: translate(0px, -50px);
+    }
+
+    100% {
+        filter: opacity(100%);
+        transform: translate(0px, -50px);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translatey(0px);
+    }
+
+    50% {
+        transform: translatey(-10px);
+    }
+
+    100% {
+        transform: translatey(0px);
+    }
+}
