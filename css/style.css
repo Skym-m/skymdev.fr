@@ -6,6 +6,7 @@ body {
   display: grid;
   grid: 100vh/1fr;
   place-items: center;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -174,7 +175,7 @@ a:hover {
 
 .about {
     padding-top: 150px;
-    padding-left: 300px;
+    padding-left: 30px;
     padding-bottom: 200px;
 }
 
@@ -239,7 +240,7 @@ a:hover {
 
 .skym-mc {
     padding-top: 150px;
-    padding-left: 300px;
+    padding-left: 30px;
     padding-bottom: 200px;
 }
 
@@ -288,7 +289,7 @@ a:hover {
 
 .services {
     padding-top: 150px;
-    padding-left: 300px;
+    padding-left: 30px;
     padding-bottom: 200px;
 }
 
@@ -333,7 +334,7 @@ a:hover {
 
 .dev {
     padding-top: 150px;
-    padding-left: 300px;
+    padding-left: 30px;
     padding-bottom: 200px;
 }
 
