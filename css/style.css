@@ -2,57 +2,6 @@
 
 @import url("https://fonts.googleapis.com/css?family=Libre+Franklin:400,700&subset=latin");
 
-body {
-    min-height: 100vh;
-    display: grid;
-    grid: 100vh/1fr;
-    place-items: center;
-    overflow-x: hidden;
-}
-
-h1 {
-    font: 10vmin/0.8 "Libre Franklin";
-    font-weight: 600;
-    letter-spacing: -0.05em;
-    color: #fff4;
-    text-shadow: 0 0 5px #fff;
-    mix-blend-mode: overlay;
-    position: relative;
-    font-size: 5rem;
-}
-
-h1::before {
-    transform: scaleX(0);
-    transform-origin: bottom right;
-}
-
-h1:hover::before {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-}
-
-h1::before {
-    content: " ";
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    inset: 0 0 0 0;
-    background: hsl(200 100% 80%);
-    z-index: -1;
-    transition: transform .3s ease;
-}
-
-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-}
-
 /* Font */
 
 @font-face {
@@ -310,16 +259,60 @@ a:hover .card_wrapper {
 
 @media (max-width: 614px) {
 
+    html {
+        background-color: #282828;
+    }
+
+    body {
+        margin: 0px;
+    }
+
     /* Welcome */
-    header {
-        display: none;
+
+    .welcome h1 {
+        text-align: left;
+        color: #fff;
+        font-family: Poppins;
+    }
+
+    .about h4 {
+        font-size: 1px;
     }
 
     /* A propos -/- about */
 
+    .about {
+        padding: 0px;
+        margin: 0px;
+    }
+
     .about h1 {
         text-align: left;
         font-size: 20px;
+        padding: 0px;
+        margin: 0px;
+        display: unset;
+    }
+
+    .wrapper {
+        margin: 0px;
+    }
+
+    #dev {
+        padding: 0px;
+        margin: 0px
+    }
+
+    .dev {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .dev h1 {
+        padding: 0px;
+        margin: 0px;
+        font-size: 20px;
+        display: unset;
     }
 
 }
