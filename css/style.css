@@ -1,29 +1,56 @@
 @charset "UTF-8";
 
 @import url("https://fonts.googleapis.com/css?family=Libre+Franklin:400,700&subset=latin");
+
 body {
-  min-height: 100vh;
-  display: grid;
-  grid: 100vh/1fr;
-  place-items: center;
-  overflow-x: hidden;
+    min-height: 100vh;
+    display: grid;
+    grid: 100vh/1fr;
+    place-items: center;
+    overflow-x: hidden;
 }
 
 h1 {
-  font: 10vmin/0.8 "Libre Franklin";
-  font-weight: 600;
-  letter-spacing: -0.05em;
-  color: #fff4;
-  text-shadow: 0 0 5px #fff;
-  mix-blend-mode: overlay;
+    font: 10vmin/0.8 "Libre Franklin";
+    font-weight: 600;
+    letter-spacing: -0.05em;
+    color: #fff4;
+    text-shadow: 0 0 5px #fff;
+    mix-blend-mode: overlay;
+    position: relative;
+    font-size: 5rem;
+}
+
+h1::before {
+    transform: scaleX(0);
+    transform-origin: bottom right;
+}
+
+h1:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+h1::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    inset: 0 0 0 0;
+    background: hsl(200 100% 80%);
+    z-index: -1;
+    transition: transform .3s ease;
 }
 
 svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
 }
 
 /* Font */
@@ -31,7 +58,7 @@ svg {
 @font-face {
     font-family: "termina";
     src: url("/fonts/termina.woff2") format("woff2"),
-           url("/fonts/termina.woff") format("woff");
+        url("/fonts/termina.woff") format("woff");
 }
 
 /* Separateur */
@@ -66,125 +93,19 @@ svg {
     background: #33DDFF;
 }
 
-
-/* Navbar */
-
-nav {
-    display: -webkit-box;
-    display: flex;
-    -webkit-box-pack: right;
-    justify-content: right;
-    -webkit-box-align: right;
-    align-items: center;
-    position: fixed;
-    z-index: 999;
-    width: 100%;
-    padding-top: 10px;
-    height: 50px;
-    background-color: #b9b3a9;
-    top: 0px;
-    font-family: 'Poppins';
-}
-
-nav a {
-    text-decoration: none;
-}
-
-nav #list {
-    display: -webkit-box;
-    display: flex;
-    -webkit-box-align: right;
-    align-items: right;
-    height: 0;
-}
-
-nav #list li a {
-    color: black;
-    list-style-type: none;
-    border-radius: 20px;
-    font-size: 1em;
-    padding: 5px;
-    transition: 1s;
-}
-
-nav #list li a:hover {
-    color: rgb(58, 58, 58);
-    border-radius: 20px;
-    font-size: 1.5em;
-    box-shadow: 0px 0px 10px rgb(58, 58, 58);
-    transition: 1s;
-}
-
-nav #list li {
-    text-align: right;
-}
-
-nav li:nth-child(1) {
-    margin-right: 15px;
-}
-
-nav li:nth-child(2) {
-    margin-right: 15px;
-}
-
-nav li:nth-child(3) {
-    margin-right: 100px;
-}
-
-ul {
-    list-style: none;
-    margin: 0;
-}
-
-a,
-a:link,
-a:visited,
-a:hover {
-    text-decoration: none;
-}
-
-/* SkymDev Portfolio */
-
-#welcome {
-    background-color: #b9b3a9;
-}
-
-.welcome {
-    padding-top: 350px;
-    padding-bottom: 250px;
-}
-
-#container {
-	width: 100vw;
-	height: 80pt;
-	top: 0;
-	bottom: 0;
-	filter: url(#threshold) blur(0.6px);
-}
-
-#text1, #text2 {
-    position: absolute;
-	width: 100%;
-	display: inline-block;
-	font-size: 80pt;
-	text-align: center;
-	user-select: none;
-}
-
 /* A propos -/- about */
 
-.about {
-    padding-top: 150px;
-    padding-left: 30px;
-    padding-bottom: 200px;
+#about {
+    padding-bottom: 100px;
 }
 
 .about h1 {
-    color: #000000	;
+    color: #000000;
     font-family: 'Tinos', bold;
     font-weight: bold;
     font-size: 160px;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, rgb(118, 134, 255) 0%, rgb(255, 194, 194) 100%);
 }
 
 .about h2 {
@@ -193,6 +114,7 @@ a:hover {
     font-weight: bold;
     font-size: 50px;
     margin-top: 0px;
+    text-decoration: underline rgb(118, 134, 255);
 }
 
 .about h4 {
@@ -212,7 +134,7 @@ a:hover {
 }
 
 .about-pays:hover {
-    background: linear-gradient(90deg, rgba(0,31,255,1) 0%, rgb(255, 206, 206) 50%, rgba(255,0,0,1) 100%);
+    background: linear-gradient(90deg, rgba(0, 31, 255, 1) 0%, rgb(255, 206, 206) 50%, rgba(255, 0, 0, 1) 100%);
     background-clip: border-box;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -221,156 +143,145 @@ a:hover {
 .about a {
     text-decoration: none;
     transition: 500ms;
-    color: white;
-    padding-bottom: 50px;
+    color: rgb(0, 0, 0);
 }
 
 .about a:hover {
     border: none;
     border-radius: 23px;
     padding: 0px 30px;
-    height: 36px;
-    color: white;
-    box-shadow: 2px 2px black;
+    color: rgb(0, 0, 0);
     background-color: #f2ce58c2;
     transition: 500ms;
 }
 
-/* Skym-Mc -/- skym-mc */
+/* Projets -/- projets */
 
-.skym-mc {
-    padding-top: 150px;
-    padding-left: 30px;
-    padding-bottom: 200px;
-}
-
-.skym-mc h1 {
-    color: #000000	;
-    font-family: 'Tinos', bold;
-    font-weight: bold;
-    font-size: 160px;
-}
-
-.skym-mc h2 {
-    color: #000000;
-    font-family: 'Tinos', bold;
-    font-weight: bold;
-}
-
-.skym-mc h4 {
-    color: #000000;
-    font-family: 'Tinos';
-    transition: 500ms;
-}
-
-.skym-mc-serveurs {
-    font-weight: bold;
-}
-
-.skym-mc a {
+a {
     text-decoration: none;
-    transition: 500ms;
-    color: orange;
+    color: inherit !important;
+    height: 425px;
+    margin-bottom: 50px;
 }
 
-.skym-mc a:hover {
-    border: none;
-    border-radius: 23px;
-    padding: 0px 30px;
-    height: 36px;
-    color: white;
-    box-shadow: 2px 2px 
-    black;
-    background-color: #f2ce58c2;
-    transition: 500ms;
+.wrapper {
+    max-width: 850px;
+    margin: 20px auto;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
-/* Mes services -/- services */
-
-.services {
-    padding-top: 150px;
-    padding-left: 30px;
-    padding-bottom: 200px;
+.card_wrapper {
+    width: 350px;
+    transition: transform 0.5s;
+    position: relative;
+    height: 430px;
+    border: 1px solid #DEDCDC;
+    border-radius: 6px;
+    background: #E4F2F9;
+    display: flex;
+    flex-direction: column;
+    background-image: url("/img/skym-mc.png");
+    background-size: 150%;
+    background-repeat: no-repeat;
+    background-position-x: -80px;
 }
 
-.services h1 {
-    color: #000000	;
-    font-family: 'Tinos', bold;
-    font-weight: bold;
-    font-size: 160px;
+a:nth-child(2) .card_wrapper {
+    background-image: url("/img/skymdev.png");
 }
 
-.services h2 {
-    color: #000000;
-    font-family: 'Tinos', bold;
-    font-weight: bold;
+a:nth-of-type(3) .card_wrapper {
+    background-image: url("/img/skym.png");
 }
 
-.services h4 {
-    color: #000000;
-    font-family: 'Tinos';
-    transition: 500ms;
+a:nth-of-type(4) .card_wrapper {
+    background-image: url("/img/serendipitartist.png");
 }
 
-.services a {
-    text-decoration: none;
-    transition: 500ms;
-    color: orange;
+.project_summary {
+    margin-top: 260px;
+    postion: relative;
+    padding: 0 20px;
+    background: #fff;
+    flex: 1;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
 }
 
-.services a:hover {
-    border: none;
-    border-radius: 23px;
-    padding: 0px 30px;
-    height: 36px;
-    color: white;
-    box-shadow: 2px 2px 
-    black;
-    background-color: #f2ce58c2;
-    transition: 500ms;
+.project_title {
+    margin-bottom: 0;
+    padding-top: 15px;
+    color: #5D6771;
+    font-family: Poppins;
+}
+
+.created_date {
+    margin: 10px 0;
+    color: #8A8EA0;
+    font-family: Poppins;
+}
+
+.project_desc {
+    margin: 0;
+    font-weight: 300;
+    width: 100%;
+    font-family: Poppins;
+}
+
+a:hover .card_wrapper {
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.09);
+    transform: scale3d(1.008, 1.008, 1);
 }
 
 /* Développement -/- dev */
 
-.dev {
-    padding-top: 150px;
-    padding-left: 30px;
-    padding-bottom: 200px;
+#dev {
+    padding-bottom: 100px;
+    padding-left: 305px;
+    padding-right: 300px;
 }
 
 .dev h1 {
-    color: #000000	;
+    color: #000000;
     font-family: 'Tinos', bold;
     font-weight: bold;
     font-size: 160px;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, rgb(118, 134, 255) 0%, rgb(255, 194, 194) 100%);
 }
 
 .dev h2 {
     color: #000000;
     font-family: 'Tinos', bold;
     font-weight: bold;
+    font-size: 50px;
+    margin-top: 0px;
+    text-decoration: underline rgb(118, 134, 255);
 }
 
 .dev h4 {
-    color: #000000;
-    font-family: 'Tinos';
+    color: #252525;
+    font-family: 'Poppins';
+    font-weight: 500;
     transition: 500ms;
+    font-size: 30px;
 }
 
 .dev a {
     text-decoration: none;
     transition: 500ms;
-    color: orange;
+    color: rgb(0, 0, 0);
 }
 
 .dev a:hover {
     border: none;
     border-radius: 23px;
     padding: 0px 30px;
-    height: 36px;
-    color: white;
-    box-shadow: 2px 2px 
-    black;
+    color: rgb(0, 0, 0);
     background-color: #f2ce58c2;
     transition: 500ms;
 }
@@ -379,13 +290,13 @@ a:hover {
 
 .footerChild {
     text-align: center;
-    color: #fff;
+    color: rgb(0, 0, 0);
     font-family: 'Poppins';
 }
 
 .footerChild a {
     text-align: center;
-    color: #fff;
+    color: rgb(0, 0, 0);
     transition: 0.5s;
 }
 
@@ -393,6 +304,24 @@ a:hover {
     text-align: center;
     color: rgb(107, 107, 107);
     transition: 0.5s;
+}
+
+/* Responsive Web */
+
+@media (max-width: 614px) {
+
+    /* Welcome */
+    header {
+        display: none;
+    }
+
+    /* A propos -/- about */
+
+    .about h1 {
+        text-align: left;
+        font-size: 20px;
+    }
+
 }
 
 /* Animations */

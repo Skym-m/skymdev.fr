@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap">
 
     <!-- Scripts -->
-
+    <script src="/js/projets.js"></script>
 
     <!-- Title -->
     <title>SkymDev // Portfolio.</title>
@@ -70,34 +70,6 @@
           </h1>
     </header>
 
-    <!-- Accueil 
-    <section id="welcome">
-        <div class="welcome">
-            <div id="container">
-                <span id="text1"></span>
-                <span id="text2"></span>
-                <script src="/js/morph.js"></script>
-            </div>
-    
-            The SVG filter used to create the merging effect
-            <svg id="filters">
-                <defs>
-                    <filter id="threshold">
-                        Basically just a threshold effect - pixels with a high enough opacity are set to full opacity, and all other pixels are set to completely transparent.
-                        <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0
-                                            0 1 0 0 0
-                                            0 0 1 0 0
-                                            0 0 0 255 -140" />
-                    </filter>
-                </defs>
-            </svg>
-        </div>
-    </section> -->
-
-    <!-- Accueil -->
-    
-    
-
     <!-- A propos -/- about -->
     <section id="about">
         <div class="about">
@@ -112,38 +84,49 @@
         </div>
     </section>
 
-    <!-- Skym-Mc -/- skym-mc -->
-    <section id="skym-mc">
-        <div class="skym-mc">
-            <h1>//Skym-Mc</h1>
-            <h2>Mon serveur Minecraft</h2>
-            <h4><a href="https://skym-mc.fr" target="BLANK_">Skym-Mc</a> est mon serveur Minecraft.<br>
-                Vous arrivez donc comme un simple citoyen du monde, et il vous appartient de fonder votre pays, celui que vous souhaitez.<br>
-                Vous allez sans doute devoir parcourir l’espace au moyen de fusées. La conquête de l’espace reprendra de plus belle,<br>
-                et les guerres localisées ou mondiales risquent de faire partie de l’histoire.<br>
-                Pour conquérir du territoire supplémentaire, annexer d’autres pays ou même écraser vos concurrents,<br>
-                vous pourrez vous servir de missiles balistiques (ICBM), de tous types.<br>
-                Du nucléaire au chimique en passant par les plus farfelus tels que les missiles à enclumes, ou à flèches.<br>
-                Si vous préferez, les armes pures et dures sont disponibles. Lance grenades, lance roquettes, fusil de sniper, armes automatiques...<br>
-                Vous aurez aussi la possibilité d’établir des lignes de transports dans tout votre pays, ou à l'international selon votre détermination.<br>
-                Tout est disponible. Avions, bateaux, trains, voitures…<br>
-                L’énergie sera aussi de la partie, avec les différents stockeurs,<br>
-                et les systèmes pour construire de véritables centrales nucléaires, et alimenter votre pays.<br>
-                Il reste encore beaucoup de contenu à découvrir, comme les cosmétiques et autres systèmes en jeu.<br></h4>
-        </div>
-    </section>
-
-    <!-- Mes services -/- services -->
-    <section id="services">
-        <div class="services">
-            <h1>//Mes services</h1>
-            <h2>Fiverr</h2>
-            <h4>Je propse mes services de développeur web et NodeJS.<br/>
-            En effet, je propose mes services sur la plateforme Fiverr.<br/>
-            Actuellement, je suis capable de réaliser des <a href="https://fr.fiverr.com/skymytb/create-you-a-custom-website-in-html-and-css-11f3" target="_BLANK">sites web</a> (sauf boutique et connexion en base de données).<br>
-            Ainsi que des <a href="https://fr.fiverr.com/skymytb/programming-you-a-cool-discord-bot-for-your-servers" target="_BLANK">bots Discord</a> (DiscordJS 12).<br/></h4>
-        </div>
-    </section>
+    <!-- Projets -/- projets -->
+    <div class="wrapper">
+      <a href="https://skym-mc.fr" target="_BLANK">
+        <article class="card_wrapper">
+          <div class="project_summary">
+            <h2 class="project_title">Skym-Mc</h2>
+            <p class="created_date">Création : 14 Avril 2022</p>
+            <p class="project_desc">Serveur Minecraft sur le thème de la vie sur Terre. (CEO)</p>
+          </div>
+        </article>
+      </a>
+      
+      <a href="https://fr.fiverr.com/skymdev/create-you-a-custom-website-in-html-and-css">
+        <article class="card_wrapper">
+          <div class="project_summary">
+            <h2 class="project_title">Freelance</h2>
+            <p class="created_date">Commencé : 25 Juin 2021</p>
+            <p class="project_desc">Je propose mes services de développeur Web.</p>
+          </div>
+        </article>
+      </a>
+      
+      <a href="https://www.youtube.com/channel/UCP7khIEKy1x4PaY61fV_qbw/videos">
+        <article class="card_wrapper">
+          <div class="project_summary">
+            <h2 class="project_title">YouTube</h2>
+            <p class="created_date">Commencé : 10 Mai 2020</p>
+            <p class="project_desc">Je fais des vidéos sur YouTube depuis le 10 Mai 2020.
+            </p>
+          </div>
+        </article>
+      </a>
+      
+      <a href="https://serendipitartist.com">
+        <article class="card_wrapper">
+          <div class="project_summary">
+            <h2 class="project_title">serendipitartist.com</h2>
+            <p class="created_date">Création : 10 Août 2022</p>
+            <p class="project_desc">Site web minimaliste pour serendipitartist.</p>
+          </div>
+        </article>
+       </a>
+    </div>
 
     <!-- Développement -/- dev -->
     <section id="dev">
@@ -157,7 +140,13 @@
             Des sites, mon serveur (accessoirement), Mysk, le bot Discord de <a href="#skym-mc">Skym-Mc</a>, ou même <a href="https://skym-mc.fr" target="_BLANK">son site.</a>.</h4>
         </div>
     </section>
-
+    
+    <!-- Footer -->
+    <footer>
+      <div class="footerChild">
+          <p>skymdev.fr by <a href="#" target="_blank"><span class="footer-text">Skym</span></a></p>
+      </div>
+  </footer>
 </body>
 
 </html>
