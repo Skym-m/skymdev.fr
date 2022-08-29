@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
-@import url("https://fonts.googleapis.com/css?family=Libre+Franklin:400,700&subset=latin");
+html {
+    overflow-x: hidden;
+}
 
 /* Font */
 
@@ -49,7 +51,7 @@
 }
 
 .about h1 {
-    color: #000000;
+    color: #ffffff;
     font-family: 'Tinos', bold;
     font-weight: bold;
     font-size: 160px;
@@ -58,8 +60,8 @@
 }
 
 .about h2 {
-    color: #000000;
-    font-family: 'Tinos', bold;
+    color: #ffffff;
+    font-family: 'Poppins', bold;
     font-weight: bold;
     font-size: 50px;
     margin-top: 0px;
@@ -67,7 +69,7 @@
 }
 
 .about h4 {
-    color: #252525;
+    color: rgb(156, 156, 156);
     font-family: 'Poppins';
     font-weight: 500;
     transition: 500ms;
@@ -123,12 +125,30 @@ a {
     justify-content: space-around;
 }
 
+#wrapper h1 {
+    color: #ffffff;
+    font-family: 'Tinos', bold;
+    font-weight: bold;
+    font-size: 160px;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, rgb(118, 134, 255) 0%, rgb(255, 194, 194) 100%);
+}
+
+#wrapper h2 {
+    color: #ffffff;
+    font-family: 'Poppins', bold;
+    font-weight: bold;
+    font-size: 50px;
+    margin-top: 0px;
+    text-decoration: underline rgb(118, 134, 255);
+}
+
 .card_wrapper {
     width: 350px;
     transition: transform 0.5s;
     position: relative;
     height: 430px;
-    border: 1px solid #DEDCDC;
+    box-shadow: 5px 10px 10px #1a1a1a;
     border-radius: 6px;
     background: #E4F2F9;
     display: flex;
@@ -153,9 +173,9 @@ a:nth-of-type(4) .card_wrapper {
 
 .project_summary {
     margin-top: 260px;
-    postion: relative;
+    position: relative;
     padding: 0 20px;
-    background: #fff;
+    background: rgb(39, 39, 39);
     flex: 1;
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
@@ -164,7 +184,7 @@ a:nth-of-type(4) .card_wrapper {
 .project_title {
     margin-bottom: 0;
     padding-top: 15px;
-    color: #5D6771;
+    color: #ffffff;
     font-family: Poppins;
 }
 
@@ -179,6 +199,7 @@ a:nth-of-type(4) .card_wrapper {
     font-weight: 300;
     width: 100%;
     font-family: Poppins;
+    color: rgb(221, 221, 221);
 }
 
 a:hover .card_wrapper {
@@ -195,7 +216,7 @@ a:hover .card_wrapper {
 }
 
 .dev h1 {
-    color: #000000;
+    color: #ffffff;
     font-family: 'Tinos', bold;
     font-weight: bold;
     font-size: 160px;
@@ -204,8 +225,8 @@ a:hover .card_wrapper {
 }
 
 .dev h2 {
-    color: #000000;
-    font-family: 'Tinos', bold;
+    color: #ffffff;
+    font-family: 'Poppins', bold;
     font-weight: bold;
     font-size: 50px;
     margin-top: 0px;
@@ -213,7 +234,7 @@ a:hover .card_wrapper {
 }
 
 .dev h4 {
-    color: #252525;
+    color: rgb(221, 221, 221);
     font-family: 'Poppins';
     font-weight: 500;
     transition: 500ms;
@@ -239,13 +260,13 @@ a:hover .card_wrapper {
 
 .footerChild {
     text-align: center;
-    color: rgb(0, 0, 0);
+    color: #fff;
     font-family: 'Poppins';
 }
 
 .footerChild a {
     text-align: center;
-    color: rgb(0, 0, 0);
+    color: #fff;
     transition: 0.5s;
 }
 
@@ -273,10 +294,16 @@ a:hover .card_wrapper {
         text-align: left;
         color: #fff;
         font-family: Poppins;
-    }
-
-    .about h4 {
-        font-size: 1px;
+        font-size: 60px;
+        padding-top: 150px;
+        padding-bottom: 150px;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin: 0px;
+        text-shadow: #b6b6b6 5px 5px 0px;
+        animation-name: float;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
     }
 
     /* A propos -/- about */
@@ -288,19 +315,52 @@ a:hover .card_wrapper {
 
     .about h1 {
         text-align: left;
-        font-size: 20px;
+        font-size: 30px;
         padding: 0px;
-        margin: 0px;
+        margin: 10px;
         display: unset;
+    }
+
+    .about h2 {
+        text-align: left;
+        font-size: 50px;
+        padding: 10px;
+    }
+
+    .about h4 {
+        font-size: 20px;
+        padding: 10px;
+    }
+
+    /* Projets -/- projets */
+
+    #wrapper {
+        padding-bottom: 100px;
     }
 
     .wrapper {
         margin: 0px;
     }
 
+    #wrapper h1 {
+        text-align: left;
+        font-size: 30px;
+        padding: 0px;
+        margin: 10px;
+        display: unset;
+    }
+
+    #wrapper h2 {
+        text-align: left;
+        font-size: 50px;
+        padding: 10px;
+    }
+    
+    /* Développement -/- dev */
+
     #dev {
         padding: 0px;
-        margin: 0px
+        padding-bottom: 100px;
     }
 
     .dev {
@@ -309,10 +369,22 @@ a:hover .card_wrapper {
     }
 
     .dev h1 {
+        text-align: left;
+        font-size: 30px;
         padding: 0px;
-        margin: 0px;
-        font-size: 20px;
+        margin: 10px;
         display: unset;
+    }
+
+    .dev h2 {
+        text-align: left;
+        font-size: 50px;
+        padding: 10px;
+    }
+
+    .dev h4 {
+        font-size: 20px;
+        padding: 10px;
     }
 
 }
