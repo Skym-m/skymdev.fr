@@ -327,11 +327,95 @@ a:hover .card_wrapper {
 
 /* Responsive Web */
 
-@media (max-width: 614px) {
+@media (max-width: 1180px) {
 
-    html {
-        background-color: #282828;
+    body {
+        margin: 0px;
     }
+
+    /* Welcome */
+
+    .welcome h1 {
+        font-size: 135px;
+    }
+
+    /* A propos -/- about */
+
+    #about {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+
+    .about h1 {
+        font-size: 100px;
+    }
+
+    .about h2 {
+        font-size: 40px;
+    }
+
+    /* Développement -/- dev */
+
+    #dev {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+
+    .dev h1 {
+        font-size: 100px;
+    }
+
+    .dev h2 {
+        font-size: 40px;
+    }
+
+}
+
+@media (max-width: 820px) {
+
+    body {
+        margin: 0px;
+    }
+
+    /* Welcome */
+
+    .welcome h1 {
+        font-size: 135px;
+    }
+
+    /* A propos -/- about */
+
+    #about {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .about h1 {
+        font-size: 100px;
+    }
+
+    .about h2 {
+        font-size: 40px;
+    }
+
+    /* Développement -/- dev */
+
+    #dev {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .dev h1 {
+        font-size: 100px;
+    }
+
+    .dev h2 {
+        font-size: 40px;
+    }
+
+}
+
+@media (max-width: 614px) {
 
     body {
         margin: 0px;
