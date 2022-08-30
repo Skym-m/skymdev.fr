@@ -317,6 +317,96 @@ a:hover .card_wrapper {
 
 /* Responsive Web */
 
+@media (max-width: 1366px) {
+
+    body {
+        margin: 0px;
+    }
+
+    /* Welcome */
+
+    .welcome h1 {
+        font-size: 135px;
+        margin-top: 25px;
+    }
+
+    /* A propos -/- about */
+
+    #about {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+
+    .about h1 {
+        font-size: 100px;
+    }
+
+    .about h2 {
+        font-size: 40px;
+    }
+
+    /* Développement -/- dev */
+
+    #dev {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+
+    .dev h1 {
+        font-size: 100px;
+    }
+
+    .dev h2 {
+        font-size: 40px;
+    }
+
+}
+
+@media (max-width: 1280px) {
+
+    body {
+        margin: 0px;
+    }
+
+    /* Welcome */
+
+    .welcome h1 {
+        font-size: 135px;
+        margin-top: 25px;
+    }
+
+    /* A propos -/- about */
+
+    #about {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+
+    .about h1 {
+        font-size: 100px;
+    }
+
+    .about h2 {
+        font-size: 40px;
+    }
+
+    /* Développement -/- dev */
+
+    #dev {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+
+    .dev h1 {
+        font-size: 100px;
+    }
+
+    .dev h2 {
+        font-size: 40px;
+    }
+
+}
+
 @media (max-width: 1180px) {
 
     body {
@@ -327,6 +417,7 @@ a:hover .card_wrapper {
 
     .welcome h1 {
         font-size: 135px;
+        margin-top: 25px;
     }
 
     /* A propos -/- about */
@@ -401,6 +492,33 @@ a:hover .card_wrapper {
 
     .dev h2 {
         font-size: 40px;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    body {
+        margin: 0px;
+    }
+
+    /* Welcome */
+
+    .welcome h1 {
+        font-size: 100px;
+        margin-top: 0px;
+    }
+
+    /* About */
+
+    .about h1 {
+        font-size: 90px;
+    }
+
+    /* Dev */
+
+    .dev h1 {
+        font-size: 90px;
     }
 
 }
@@ -521,6 +639,70 @@ a:hover .card_wrapper {
         padding: 10px;
     }
 
+}
+
+@media (max-width: 360px) {
+
+    body {
+        margin: 0px;
+    }
+
+    /* Welcome */
+
+    .welcome h1 {
+        font-size: 55px;
+    }
+
+}
+
+@media (max-width: 280px) {
+
+    body {
+        margin: 0px;
+    }
+
+    /* Welcome */
+
+    .welcome h1 {
+        font-size: 40px;
+        justify-content: left;
+    }
+
+    /* Projets */
+
+    .card_wrapper {
+        width: 260px;
+    }
+
+    a:nth-of-type(1) .card_wrapper {
+        background-position-x: -270px;
+        background-position-y: -50px;
+        background-size: cover;
+    }
+
+    a:nth-of-type(4) .card_wrapper {
+        background-position-x: -270px;
+        background-position-y: -50px;
+        background-size: cover;
+    }
+
+    a:nth-of-type(5) .card_wrapper {
+        background-position-x: -270px;
+        background-position-y: -50px;
+        background-size: cover;
+    }
+
+    a:nth-of-type(6) .card_wrapper {
+        background-position-x: -270px;
+        background-position-y: -50px;
+        background-size: cover;
+    }
+
+    /* Dev */
+
+    .dev h2 {
+        font-size: 40px;
+    }
 }
 
 /* Animations */
