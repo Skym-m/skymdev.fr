@@ -1,29 +1,7 @@
 @charset "UTF-8";
 
 html {
-    overflow-x: hidden;
     background-color: #282828;
-}
-
-/* Font */
-
-@font-face {
-    font-family: "termina";
-    src: url("/fonts/termina.woff2") format("woff2"),
-        url("/fonts/termina.woff") format("woff");
-}
-
-/* Separateur */
-
-.separator {
-    text-align: center;
-    width: 75%;
-    margin-left: 12.5%;
-    margin-right: 12.5%;
-    color: #bbbbbb;
-    height: 3px !important;
-    border-radius: 100%;
-    opacity: 1;
 }
 
 /* Scrollbar */
@@ -37,7 +15,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #33ddffd5;
+    background-color: #33ddffd5;
     border-radius: 20px;
 }
 
@@ -534,24 +512,6 @@ a:hover .card_wrapper {
 }
 
 /* Animations */
-
-@keyframes come-slide-zoom {
-    0% {
-        filter: opacity(0%);
-        transform: translate(0px, 10px);
-    }
-
-    50% {
-        filter: opacity(100%);
-        transform: translate(0px, 10px);
-    }
-
-    100% {
-        filter: opacity(100%);
-        transform: scale(150%);
-        transform: translate(0px, -270px);
-    }
-}
 
 @keyframes zoom {
     0% {
