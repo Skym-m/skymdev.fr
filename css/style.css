@@ -181,7 +181,7 @@ a {
 }
 
 a:nth-child(2) .card_wrapper {
-    background-image: url("/img/skymdev.png");
+    background-image: url("/img/freelance.png");
 }
 
 a:nth-of-type(3) .card_wrapper {
@@ -190,6 +190,18 @@ a:nth-of-type(3) .card_wrapper {
 
 a:nth-of-type(4) .card_wrapper {
     background-image: url("/img/serendipitartist.png");
+}
+
+a:nth-of-type(5) .card_wrapper {
+    background-image: url("/img/skymdev.png");
+}
+
+a:nth-of-type(6) .card_wrapper {
+    background-image: url("/img/skymme.png");
+}
+
+a:nth-of-type(7) .card_wrapper {
+    background-image: url("/img/evgames.png");
 }
 
 .project_summary {
