@@ -509,13 +509,13 @@ a:hover .card_wrapper {
         margin-top: 0px;
     }
 
-    /* About */
+    /* A propos -/- about */
 
     .about h1 {
         font-size: 90px;
     }
 
-    /* Dev */
+    /* Développement -/- dev */
 
     .dev h1 {
         font-size: 90px;
@@ -668,7 +668,7 @@ a:hover .card_wrapper {
         justify-content: left;
     }
 
-    /* Projets */
+    /* Projets -/- projets */
 
     .card_wrapper {
         width: 260px;
@@ -698,7 +698,7 @@ a:hover .card_wrapper {
         background-size: cover;
     }
 
-    /* Dev */
+    /* Développement -/- dev */
 
     .dev h2 {
         font-size: 40px;
