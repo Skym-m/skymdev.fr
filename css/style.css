@@ -2,6 +2,7 @@
 
 html {
     overflow-x: hidden;
+    background-color: #282828;
 }
 
 /* Font */
@@ -44,10 +45,35 @@ html {
     background: #33DDFF;
 }
 
+/* Welcome */
+
+.welcome {
+    padding-top: 150px;
+    padding-bottom: 150px;
+}
+
+.welcome h1 {
+    text-align: center;
+    font-size: 150px;
+    color: #fff;
+    font-family: Poppins;
+    text-shadow: #b6b6b6 5px 5px 0px;
+    animation-name: float;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
 /* A propos -/- about */
 
 #about {
     padding-bottom: 100px;
+    padding-left: 305px;
+    padding-right: 300px;
+    animation-name: zoom;
+    animation-duration: 3s;
+    filter: opacity(0);
+    animation-fill-mode: forwards;
+    animation-delay: 500ms;
 }
 
 .about h1 {
@@ -57,6 +83,7 @@ html {
     font-size: 160px;
     margin-bottom: 10px;
     background: linear-gradient(90deg, rgb(118, 134, 255) 0%, rgb(255, 194, 194) 100%);
+    border-radius: 20px;
 }
 
 .about h2 {
@@ -64,8 +91,8 @@ html {
     font-family: 'Poppins', bold;
     font-weight: bold;
     font-size: 50px;
-    margin-top: 0px;
     text-decoration: underline rgb(118, 134, 255);
+    margin-top: 0px;
 }
 
 .about h4 {
@@ -108,6 +135,14 @@ html {
 
 /* Projets -/- projets */
 
+#wrapper {
+    animation-name: zoom;
+    animation-duration: 3s;
+    filter: opacity(0);
+    animation-fill-mode: forwards;
+    animation-delay: 1500ms;
+}
+
 a {
     text-decoration: none;
     color: inherit !important;
@@ -129,9 +164,15 @@ a {
     color: #ffffff;
     font-family: 'Tinos', bold;
     font-weight: bold;
-    font-size: 160px;
+    font-size: 60px;
     margin-bottom: 10px;
     background: linear-gradient(90deg, rgb(118, 134, 255) 0%, rgb(255, 194, 194) 100%);
+    text-align: left;
+    padding: 0px;
+    padding-right: 950px;
+    margin: 30px;
+    display: none;
+    text-align: center;
 }
 
 #wrapper h2 {
@@ -139,8 +180,10 @@ a {
     font-family: 'Poppins', bold;
     font-weight: bold;
     font-size: 50px;
-    margin-top: 0px;
     text-decoration: underline rgb(118, 134, 255);
+    margin: 30px;
+    padding-bottom: 50px;
+    text-align: center;
 }
 
 .card_wrapper {
@@ -213,6 +256,11 @@ a:hover .card_wrapper {
     padding-bottom: 100px;
     padding-left: 305px;
     padding-right: 300px;
+    animation-name: zoom;
+    animation-duration: 3s;
+    filter: opacity(0);
+    animation-fill-mode: forwards;
+    animation-delay: 2000ms;
 }
 
 .dev h1 {
@@ -222,6 +270,7 @@ a:hover .card_wrapper {
     font-size: 160px;
     margin-bottom: 10px;
     background: linear-gradient(90deg, rgb(118, 134, 255) 0%, rgb(255, 194, 194) 100%);
+    border-radius: 20px;
 }
 
 .dev h2 {
@@ -290,23 +339,25 @@ a:hover .card_wrapper {
 
     /* Welcome */
 
+    .welcome {
+        padding: 0px;
+    }
+
     .welcome h1 {
         text-align: left;
-        color: #fff;
-        font-family: Poppins;
         font-size: 60px;
         padding-top: 150px;
         padding-bottom: 150px;
         padding-left: 20px;
         padding-right: 20px;
         margin: 0px;
-        text-shadow: #b6b6b6 5px 5px 0px;
-        animation-name: float;
-        animation-duration: 3s;
-        animation-iteration-count: infinite;
     }
 
     /* A propos -/- about */
+
+    #about {
+        padding: 0px;
+    }
 
     .about {
         padding: 0px;
@@ -319,17 +370,21 @@ a:hover .card_wrapper {
         padding: 0px;
         margin: 10px;
         display: unset;
+        border-radius: 0px;
     }
 
     .about h2 {
         text-align: left;
         font-size: 50px;
         padding: 10px;
+        margin: 0px;
     }
 
     .about h4 {
         font-size: 20px;
         padding: 10px;
+        margin: 0px;
+        padding-bottom: 100px;
     }
 
     /* Projets -/- projets */
@@ -340,6 +395,7 @@ a:hover .card_wrapper {
 
     .wrapper {
         margin: 0px;
+        padding: 0px;
     }
 
     #wrapper h1 {
@@ -347,6 +403,7 @@ a:hover .card_wrapper {
         font-size: 30px;
         padding: 0px;
         margin: 10px;
+        border-radius: 0px;
         display: unset;
     }
 
@@ -354,6 +411,8 @@ a:hover .card_wrapper {
         text-align: left;
         font-size: 50px;
         padding: 10px;
+        padding-bottom: 50px;
+        margin: 0px;
     }
     
     /* Développement -/- dev */
@@ -374,6 +433,7 @@ a:hover .card_wrapper {
         padding: 0px;
         margin: 10px;
         display: unset;
+        border-radius: 0px;
     }
 
     .dev h2 {
