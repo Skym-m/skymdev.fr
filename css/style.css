@@ -1,7 +1,86 @@
 @charset "UTF-8";
 
+/* Fonts */
+
+@font-face {
+    font-family: 'ClashGrotesk-Variable';
+    src: url('../fonts/ClashGrotesk-Variable.woff2') format('woff2'),
+         url('../fonts/ClashGrotesk-Variable.woff') format('woff'),
+         url('../fonts/ClashGrotesk-Variable.ttf') format('truetype');
+         font-weight: 200 700;
+         font-display: swap;
+         font-style: normal;
+  }
+  
+  
+  @font-face {
+    font-family: 'ClashGrotesk-Extralight';
+    src: url('../fonts/ClashGrotesk-Extralight.woff2') format('woff2'),
+         url('../fonts/ClashGrotesk-Extralight.woff') format('woff'),
+         url('../fonts/ClashGrotesk-Extralight.ttf') format('truetype');
+         font-weight: 200;
+         font-display: swap;
+         font-style: normal;
+  }
+  
+  
+  @font-face {
+    font-family: 'ClashGrotesk-Light';
+    src: url('../fonts/ClashGrotesk-Light.woff2') format('woff2'),
+         url('../fonts/ClashGrotesk-Light.woff') format('woff'),
+         url('../fonts/ClashGrotesk-Light.ttf') format('truetype');
+         font-weight: 300;
+         font-display: swap;
+         font-style: normal;
+  }
+  
+  
+  @font-face {
+    font-family: 'ClashGrotesk-Regular';
+    src: url('../fonts/ClashGrotesk-Regular.woff2') format('woff2'),
+         url('../fonts/ClashGrotesk-Regular.woff') format('woff'),
+         url('../fonts/ClashGrotesk-Regular.ttf') format('truetype');
+         font-weight: 400;
+         font-display: swap;
+         font-style: normal;
+  }
+  
+  
+  @font-face {
+    font-family: 'ClashGrotesk-Medium';
+    src: url('../fonts/ClashGrotesk-Medium.woff2') format('woff2'),
+         url('../fonts/ClashGrotesk-Medium.woff') format('woff'),
+         url('../fonts/ClashGrotesk-Medium.ttf') format('truetype');
+         font-weight: 500;
+         font-display: swap;
+         font-style: normal;
+  }
+  
+  
+  @font-face {
+    font-family: 'ClashGrotesk-Semibold';
+    src: url('../fonts/ClashGrotesk-Semibold.woff2') format('woff2'),
+         url('../fonts/ClashGrotesk-Semibold.woff') format('woff'),
+         url('../fonts/ClashGrotesk-Semibold.ttf') format('truetype');
+         font-weight: 600;
+         font-display: swap;
+         font-style: normal;
+  }
+  
+  
+  @font-face {
+    font-family: 'ClashGrotesk-Bold';
+    src: url('../fonts/ClashGrotesk-Bold.woff2') format('woff2'),
+         url('../fonts/ClashGrotesk-Bold.woff') format('woff'),
+         url('../fonts/ClashGrotesk-Bold.ttf') format('truetype');
+         font-weight: 700;
+         font-display: swap;
+         font-style: normal;
+  }
+  
+
 html {
-    background-color: #282828;
+    background-color: #0c0b14;
 }
 
 /* Scrollbar */
@@ -34,7 +113,7 @@ html {
     text-align: center;
     font-size: 150px;
     color: #fff;
-    font-family: Poppins;
+    font-family: "ClashGrotesk-Bold";
     text-shadow: #b6b6b6 5px 5px 0px;
     animation-name: float;
     animation-duration: 3s;
@@ -56,8 +135,7 @@ html {
 
 .about h1 {
     color: #ffffff;
-    font-family: 'Tinos', bold;
-    font-weight: bold;
+    font-family: "ClashGrotesk-Semibold";
     font-size: 100px;
     margin-bottom: 10px;
     background: linear-gradient(90deg, rgb(118, 134, 255) 0%, rgb(255, 194, 194) 100%);
@@ -99,15 +177,15 @@ html {
 .about a {
     text-decoration: none;
     transition: 500ms;
-    color: rgb(0, 0, 0);
+    color: #33DDFF !important;
 }
 
 .about a:hover {
     border: none;
     border-radius: 23px;
     padding: 0px 30px;
-    color: rgb(0, 0, 0);
-    background-color: #f2ce58c2;
+    color: #000 !important;
+    background-color: #5d58f2c2;
     transition: 500ms;
 }
 
@@ -255,8 +333,7 @@ a:hover .card_wrapper {
 
 .dev h1 {
     color: #ffffff;
-    font-family: 'Tinos', bold;
-    font-weight: bold;
+    font-family: "ClashGrotesk-Semibold";
     font-size: 90px;
     margin-bottom: 10px;
     background: linear-gradient(90deg, rgb(118, 134, 255) 0%, rgb(255, 194, 194) 100%);
@@ -283,15 +360,15 @@ a:hover .card_wrapper {
 .dev a {
     text-decoration: none;
     transition: 500ms;
-    color: rgb(0, 0, 0);
+    color: #33DDFF !important;
 }
 
 .dev a:hover {
     border: none;
     border-radius: 23px;
     padding: 0px 30px;
-    color: rgb(0, 0, 0);
-    background-color: #f2ce58c2;
+    color: #000 !important;
+    background-color: #5d58f2c2;
     transition: 500ms;
 }
 
