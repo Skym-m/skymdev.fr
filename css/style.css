@@ -265,18 +265,22 @@ a:nth-child(1) .card_wrapper {
 }
 
 a:nth-child(2) .card_wrapper {
+    background-image: url("/img/rmch.png");
+}
+
+a:nth-child(3) .card_wrapper {
     background-image: url("/img/freelance.png");
 }
 
-a:nth-of-type(3) .card_wrapper {
+a:nth-of-type(4) .card_wrapper {
     background-image: url("/img/serendipitartist.png");
 }
 
-a:nth-of-type(4) .card_wrapper {
+a:nth-of-type(5) .card_wrapper {
     background-image: url("/img/skymdev.png");
 }
 
-a:nth-of-type(5) .card_wrapper {
+a:nth-of-type(6) .card_wrapper {
     background-image: url("/img/cretaceous-kingdom.png");
 }
 
