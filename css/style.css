@@ -318,6 +318,7 @@ a:nth-of-type(5) .card_wrapper {
 .footerChild {
     text-align: center;
     color: #fff;
+    padding: 3%;
 }
 
 .footerChild a {
