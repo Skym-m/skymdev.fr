@@ -284,6 +284,18 @@ a:nth-of-type(6) .card_wrapper {
     background-image: url("/img/cretaceous-kingdom.png");
 }
 
+a:nth-of-type(7) .card_wrapper {
+    background-image: url("/img/admilaeti.png");
+}
+
+a:nth-of-type(8) .card_wrapper {
+    background-image: url("/img/boucheriegarnier.png");
+}
+
+a:nth-of-type(9) .card_wrapper {
+    background-image: url("/img/jean-lain.png");
+}
+
 /* Développement -/- dev */
 
 #dev {
