@@ -142,13 +142,14 @@
 
 .about h4 {
     color: white;
-    font-size:32px;
+    font-size: 32px;
 }
 
 #about img {
     width: 20%;
     border-radius: 15px;
-    margin: 2%;
+    margin-right: 2%;
+    margin-top: 2%;
     float: left;
 }
 
@@ -156,10 +157,7 @@
 /* Projects */
 
 #wrapper {
-    padding-top: 5%;
-    padding-left: 12.5%;
-    padding-right: 12.5%;
-    padding-bottom: 5%;
+    padding: 5% 12.5%;
 
     animation-name: zoom;
     animation-duration: 3s;
@@ -323,9 +321,7 @@
 /* Développement -/- dev */
 
 #dev {
-    padding-top: 5%;
-    padding-left: 12.5%;
-    padding-right: 12.5%;
+    padding: 5% 12.5%;
 
     animation-name: zoom;
     animation-duration: 3s;
@@ -343,9 +339,8 @@
 }
 
 .dev h4 {
-    color: grey;
-    font-weight: 500;
-    font-size: 30px;
+    color: white;
+    font-size: 32px;
 }
 
 
@@ -363,48 +358,51 @@
     }
 
     #about {
-        padding: 10%;
-        padding-top: 20%;
+        padding: 20% 10% 10%;
+    }
+
+    #about img {
+        width: 40%;
+        margin-right: 5%;
+        margin-top: 5%;
+        margin-bottom: 5%;
     }
 
     .about h1 {
-        font-size: 50px;
+        font-size: 32px;
+    }
+
+    .about h4 {
+        font-size: 17px;
     }
 
     #wrapper {
-        padding: 10%;
-        padding-top: 20%;
+        padding: 20% 10% 10%;
     }
 
     #wrapper h1 {
-        font-size: 50px;
+        font-size: 32px;
     }
 
     .wrapper {
         display: inline;
     }
 
-    .wrapper h3 {
-        margin: 0%;
-    }
-
-    .wrapper h4 {
-        margin: 0%;
-    }
-
     .card_wrapper {
         width: 350px;
-        height: 150px;
-        margin-top: 20%;
-        margin-bottom: 0%;
+        height: 200px;
+        margin-top: 5%;
     }
 
     #dev {
-        padding: 10%;
-        padding-top: 20%;
+        padding: 20% 10% 10%;
     }
 
     .dev h1 {
-        font-size: 50px;
+        font-size: 32px;
+    }
+
+    .dev h4 {
+        font-size: 17px;
     }
 }

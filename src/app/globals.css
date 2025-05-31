@@ -134,12 +134,11 @@ footer {
 
 .footerChild p {
   padding: 1%;
-  font-weight: 800;
 }
 
 .footerChild a {
   color: #fff;
-  padding: 1%;
+  padding: 0.5%;
   transition: 0.5s;
 }
 
@@ -147,6 +146,16 @@ footer {
   text-align: center;
   color: rgb(107, 107, 107);
   transition: 0.5s;
+}
+
+@media (max-width : 435px) {
+    .footerChild {
+        font-size: 16px;
+    }
+
+    .footerChild p {
+        font-size: 14px;
+    }
 }
 
 
