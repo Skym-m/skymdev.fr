@@ -357,6 +357,20 @@
         font-size: 40px;
     }
 
+    .project_modal {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal_grid {
+        display: initial;
+        width: 75%;
+        height: 75%;
+    }
+
+    .top_right h1 {
+        font-size: 32px;
+    }
+
     #about {
         padding: 20% 10% 10%;
     }
