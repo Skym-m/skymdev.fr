@@ -56,7 +56,7 @@ export default async function Home() {
                         qu'ils soient de simples sites vitrines ou des boutiques en ligne.
                         J'écris le code à la main et par conséquent n'utilise aucun éditeur
                         tel que WordPress, Divi, Webflow... Ainsi, mes clients ont un accès total,
-                        du code source à la gestion du contenu
+                        du code source à la gestion du contenu.
                         J'utilise Adobe Photoshop pour les logos et visuels, et
                         Filmora pour les travaux audiovisuels.
                     </h4>
