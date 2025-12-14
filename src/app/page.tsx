@@ -1,5 +1,5 @@
 import '@/app/styles/style.css'
-import { client } from '@/sanity/lib/client'
+import {client} from '@/sanity/lib/client'
 import ProjectList from '@/app/components/ProjectList'
 import WelcomeSection from "@/app/components/WelcomeSection";
 
@@ -24,27 +24,29 @@ export default async function Home() {
 
     return (
         <>
-            <WelcomeSection />
+            <WelcomeSection/>
 
             <section id="about">
                 <div className="about">
-                    <img src='/skym.png' alt="SkymDev" />
+                    <img src='/skym.png' alt="SkymDev"/>
                     <h1>A propos de moi</h1>
                     <h4>Bonjour ! Moi c'est Skym. Je m'appelle Yannis, je suis développeur.
-                        <br/>Depuis tout petit, j'ai toujours aimé l'informatique et par-dessus tout l'espace. J'ai une passion pour tout ce qui vole.<br/>
-                    Tout naturellement, j'ai un esprit scientifique et j'aime énormément ce qui touche à la science
-                    de manière générale.<br/>
-                    <br/>J'ai 17 ans et j'ai mené, depuis quelques années, plusieurs projets.<br/>
+                        <br/>Depuis tout petit, j'ai toujours aimé l'informatique et par-dessus tout l'espace. J'ai une
+                        passion pour tout ce qui vole.<br/>
+                        Tout naturellement, j'ai un esprit scientifique et j'aime énormément ce qui touche à la science
+                        de manière générale.<br/>
+                        <br/>J'ai 18 ans et j'ai mené, depuis quelques années, plusieurs projets.<br/>
                         Qu'ils soient audiovisuels, informatiques, graphiques, ils sont tous répertoriés plus bas.<br/>
 
                         <br/>Certains sont terminés, d'autres sont en cours de développement ou actifs.<br/>
-                        Ils sont parfois réalisés pour des clients, et parfois pour moi-même. Chacun exploite des compétences différentes,
+                        Ils sont parfois réalisés pour des clients, et parfois pour moi-même. Chacun exploite des
+                        compétences différentes,
                         que j'ai acquises au fil des années de manière entièrement autodidacte.<br/>
                     </h4>
                 </div>
             </section>
 
-            <ProjectList projects={projects} />
+            <ProjectList projects={projects}/>
 
             <section id="dev">
                 <div className="dev">
@@ -56,7 +58,7 @@ export default async function Home() {
                         tel que WordPress, Divi, Webflow... Ainsi, mes clients ont un accès total,
                         du code source à la gestion du contenu
                         J'utilise Adobe Photoshop pour les logos et visuels, et
-                    Filmora pour les travaux audiovisuels.
+                        Filmora pour les travaux audiovisuels.
                     </h4>
                 </div>
             </section>

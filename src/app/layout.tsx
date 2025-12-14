@@ -1,16 +1,13 @@
-import type { Metadata } from "next";
+import type {Metadata} from "next";
 import "./globals.css";
-import { Poppins } from 'next/font/google'
-import Footer from '@/app/components/footer';
+import Footer from "./components/footer";
+import {Poppins} from "next/font/google";
 import React from "react";
-import { Analytics } from "@vercel/analytics/next"
 
 const poppins = Poppins({
-    subsets: ['latin'],
-    weight: ['400', '600', '700'],
-    variable: '--font-poppins',
-    display: 'swap',
-})
+    subsets: ["latin"],
+    weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "SkymDev's Portfolio",
@@ -18,19 +15,16 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-      <>
-          <html lang="fr">
-            <body className={`${poppins.className}`}>
-                {children}
-                <Analytics />
-            </body>
-          </html>
-          <Footer/>
-      </>
-  );
+                                       children,
+                                   }: {
+    children: React.ReactNode
+}) {
+    return (
+        <html lang="fr" className={poppins.className}>
+        <body>
+        {children}
+        <Footer/>
+        </body>
+        </html>
+    )
 }
