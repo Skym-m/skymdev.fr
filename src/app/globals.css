@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 html,
 body,
 div,
@@ -84,7 +85,6 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   font: inherit;
   vertical-align: baseline;
 }
@@ -93,6 +93,7 @@ body,
 html {
   padding: 0;
   margin: 0;
+  border: 0;
   max-width: 100%;
   background-color: #121212;
 }
@@ -147,6 +148,9 @@ footer {
   color: rgb(107, 107, 107);
   transition: 0.5s;
 }
+
+
+/* Responsive Web Général */
 
 @media (max-width : 450px) {
     .footerChild {
