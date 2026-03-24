@@ -28,6 +28,8 @@ html {
   scrollbar-color: rgba(196, 207, 235, 0.4) rgba(255, 255, 255, 0.04);
   /* Safari overscroll : évite les bordures blanches en rubber-band */
   background-color: #03060d;
+  /* clip (≠ hidden) coupe aussi les position:fixed qui dépassent */
+  overflow-x: clip;
 }
 
 body {
@@ -48,7 +50,8 @@ body::after {
   pointer-events: none;
   z-index: 0;
   border-radius: 999px;
-  filter: blur(95px);
+  /* 60px au lieu de 95px : rendu GPU moins lourd, effet visuel quasi-identique */
+  filter: blur(60px);
   opacity: 0.35;
   animation: driftAura 18s ease-in-out infinite alternate;
 }
@@ -80,7 +83,7 @@ body::after {
 
 .site-sky__stars {
   position: absolute;
-  inset: -12vh -6vw 0;
+  inset: -12vh 0 0;
   will-change: transform, opacity;
 }
 
@@ -201,6 +204,7 @@ a {
   inset: 0;
   pointer-events: none;
   z-index: 0;
+  overflow: hidden;
 }
 
 .hero-cloud {
@@ -944,7 +948,8 @@ a {
     transform: translate3d(0, 0, 0) scale(1);
   }
   to {
-    transform: translate3d(2rem, -1.6rem, 0) scale(1.08);
+    /* pas de déplacement horizontal positif pour éviter l'overflow-x */
+    transform: translate3d(-0.5rem, -1.6rem, 0) scale(1.08);
   }
 }
 
@@ -2239,7 +2244,8 @@ a {
 /* Wrapper parallax pour les nuages de fond */
 .site-sky__clouds {
   position: absolute;
-  inset: -10vh -6vw 0;
+  /* inset horizontal à 0 : les nuages sont contenus par le overflow:hidden du site-sky */
+  inset: -10vh 0 0;
   will-change: transform, opacity;
 }
 
