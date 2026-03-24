@@ -26,6 +26,8 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: rgba(196, 207, 235, 0.4) rgba(255, 255, 255, 0.04);
+  /* Safari overscroll : évite les bordures blanches en rubber-band */
+  background-color: #03060d;
 }
 
 body {
@@ -1081,10 +1083,6 @@ a {
     padding: 1.25rem 1.5rem;
   }
 
-  .saturn-mockup-screen {
-    min-height: 180px;
-  }
-
   .saturn-hero__mockup {
     margin-top: 2.5rem;
   }
@@ -1632,6 +1630,18 @@ a {
   .saturn-feature--reverse .saturn-feature__visual {
     order: 0;
   }
+
+  /* Les frames suivent les proportions de l'image (2880×1616 ≈ 16/9) */
+  .saturn-screen-frame,
+  .saturn-mockup-screen {
+    min-height: 0;
+    aspect-ratio: 2880 / 1616;
+  }
+
+  .saturn-mockup-screen img {
+    height: auto;
+    object-fit: unset;
+  }
 }
 
 /* Capabilities grid */
@@ -2100,6 +2110,7 @@ a {
 
 [data-theme="day"] html {
   scrollbar-color: rgba(30, 90, 200, 0.35) rgba(0, 60, 140, 0.05);
+  background-color: #9dd0f0; /* Correspond au haut du dégradé ciel jour */
 }
 
 [data-theme="day"] ::-webkit-scrollbar-track {
