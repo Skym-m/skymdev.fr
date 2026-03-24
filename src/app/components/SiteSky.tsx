@@ -35,11 +35,23 @@ export default function SiteSky() {
   })
 
   const rafRef = useRef(0)
+  // Cache la référence au footer pour éviter un offsetTop à chaque scroll
+  const footerTopRef = useRef<number | null>(null)
 
   useEffect(() => {
+    const getFooterTop = () => {
+      if (footerTopRef.current === null) {
+        const footer = document.querySelector(".site-footer")
+        footerTopRef.current =
+          footer instanceof HTMLElement
+            ? footer.offsetTop
+            : document.body.scrollHeight
+      }
+      return footerTopRef.current
+    }
+
     const update = () => {
-      const footer = document.querySelector(".site-footer")
-      const footerTop = footer instanceof HTMLElement ? footer.offsetTop : document.body.scrollHeight
+      const footerTop = getFooterTop()
       const travelEnd = Math.max(footerTop - window.innerHeight * 0.5, 1)
       const progress = clamp(window.scrollY / travelEnd, 0, 1)
 
@@ -65,14 +77,19 @@ export default function SiteSky() {
       rafRef.current = window.requestAnimationFrame(update)
     }
 
+    const handleResize = () => {
+      footerTopRef.current = null
+      handleScroll()
+    }
+
     update()
     window.addEventListener("scroll", handleScroll, { passive: true })
-    window.addEventListener("resize", handleScroll)
+    window.addEventListener("resize", handleResize, { passive: true })
 
     return () => {
       cancelAnimationFrame(rafRef.current)
       window.removeEventListener("scroll", handleScroll)
-      window.removeEventListener("resize", handleScroll)
+      window.removeEventListener("resize", handleResize)
     }
   }, [])
 
@@ -85,7 +102,8 @@ export default function SiteSky() {
       {/* Nuages de fond — parallaxe doux vers le bas au scroll */}
       {theme === 'day' && (
         <div className="site-sky__clouds" style={cloudsStyle}>
-          <DayClouds count={14} />
+          {/* 8 nuages au lieu de 14 : même effet, moins de filtres blur simultanés */}
+          <DayClouds count={8} />
         </div>
       )}
 
