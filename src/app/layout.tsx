@@ -25,7 +25,7 @@ export default function RootLayout({
         <html lang="fr" className={poppins.className} suppressHydrationWarning>
         <head>
           {/* Inline script to set data-theme before first paint to avoid CSS flash */}
-          <script dangerouslySetInnerHTML={{__html: `(function(){var h=new Date().getHours();document.documentElement.setAttribute('data-theme','day');})();`}} />
+          <script dangerouslySetInnerHTML={{__html: `(function(){var h=new Date().getHours();document.documentElement.setAttribute('data-theme',h>=8&&h<18?'day':'night');})();`}} />
         </head>
         <body>
         <ThemeProvider>

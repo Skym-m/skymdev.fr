@@ -989,7 +989,7 @@ a {
 
 @media (max-width: 640px) {
   :root {
-    --content-width: min(1120px, calc(100vw - 1.5rem));
+    --content-width: min(1120px, calc(100vw - 2.5rem));
   }
 
   .hero {
@@ -1057,6 +1057,45 @@ a {
     width: 100%;
     justify-content: center;
   }
+
+  /* Saturn — réductions mobile */
+  .saturn-statement {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .saturn-statement--sm {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .saturn-avail__card {
+    padding: 1.5rem;
+  }
+
+  .saturn-cap {
+    padding: 1.25rem;
+  }
+
+  .saturn-role {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .saturn-mockup-screen {
+    min-height: 180px;
+  }
+
+  .saturn-hero__mockup {
+    margin-top: 2.5rem;
+  }
+
+  .saturn-feature__desc {
+    max-width: 100%;
+  }
+
+  .saturn-tech__pill {
+    padding: 0.45rem 0.85rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1078,6 +1117,21 @@ a {
 
   .project-card__title {
     font-size: 1.05rem;
+  }
+
+  /* Saturn hero — titre moins écrasant sur petit écran */
+  .saturn-hero__title {
+    font-size: clamp(3.5rem, 15vw, 5rem);
+  }
+
+  .saturn-hero {
+    padding-top: 5.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .saturn-roles__grid,
+  .saturn-caps__grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1561,15 +1615,8 @@ a {
   width: 100%;
   display: block;
   position: relative;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  z-index: 2;
   color: transparent;
-}
-
-.saturn-screen-frame img.saturn-img--loaded,
-.saturn-mockup-screen img.saturn-img--loaded {
-  opacity: 1;
 }
 
 @media (max-width: 768px) {

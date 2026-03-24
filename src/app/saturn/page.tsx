@@ -18,6 +18,8 @@ export default function SaturnPage() {
     gsap.registerPlugin(ScrollTrigger)
 
     // Neutralise le CSS saturn-reveal pour laisser GSAP tout gérer
+    const isMobile = window.innerWidth <= 768
+
     document.querySelectorAll<HTMLElement>(".saturn-reveal").forEach((el) => {
       el.style.opacity = "1"
       el.style.transform = "none"
@@ -32,25 +34,25 @@ export default function SaturnPage() {
         { opacity: 1, y: 0, duration: 0.65, ease: "power2.out" }
       )
       .fromTo(".saturn-hero__title",
-        { opacity: 0, y: 64, scale: 0.96 },
+        { opacity: 0, y: isMobile ? 36 : 64, scale: 0.96 },
         { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "power4.out" }, "-=0.35"
       )
       .fromTo(".saturn-hero__sub",
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: isMobile ? 18 : 30 },
         { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, "-=0.7"
       )
       .fromTo(".saturn-hero__tagline",
-        { opacity: 0, y: 20 },
+        { opacity: 0, y: 14 },
         { opacity: 1, y: 0, duration: 0.75, ease: "power3.out" }, "-=0.55"
       )
       .fromTo(".saturn-hero__mockup",
-        { opacity: 0, y: 60, scale: 0.93 },
+        { opacity: 0, y: isMobile ? 30 : 60, scale: 0.93 },
         { opacity: 1, y: 0, scale: 1, duration: 1.1, ease: "power3.out" }, "-=0.8"
       )
 
     // ─── 2. Hero parallax au scroll ────────────────────────────────
     gsap.to(".saturn-hero__content", {
-      y: -50,
+      y: isMobile ? -20 : -50,
       ease: "none",
       scrollTrigger: {
         trigger: ".saturn-hero",
@@ -115,7 +117,12 @@ export default function SaturnPage() {
 
       if (visual) {
         gsap.fromTo(visual,
-          { opacity: 0, scale: 0.89, y: 52, x: isReverse ? -40 : 40 },
+          {
+            opacity: 0,
+            scale: isMobile ? 0.94 : 0.89,
+            y: isMobile ? 28 : 52,
+            x: isMobile ? 0 : (isReverse ? -40 : 40),
+          },
           {
             opacity: 1, scale: 1, y: 0, x: 0,
             duration: 1.1, ease: "power3.out",
@@ -126,7 +133,11 @@ export default function SaturnPage() {
 
       if (copy) {
         gsap.fromTo(copy,
-          { opacity: 0, y: 36, x: isReverse ? 30 : -30 },
+          {
+            opacity: 0,
+            y: isMobile ? 20 : 36,
+            x: isMobile ? 0 : (isReverse ? 30 : -30),
+          },
           {
             opacity: 1, y: 0, x: 0,
             duration: 1, ease: "power3.out",
@@ -138,7 +149,7 @@ export default function SaturnPage() {
 
       if (items.length) {
         gsap.fromTo(items,
-          { opacity: 0, x: -18 },
+          { opacity: 0, x: isMobile ? 0 : -18 },
           {
             opacity: 1, x: 0,
             stagger: 0.09,
@@ -280,8 +291,6 @@ export default function SaturnPage() {
                 key={screen("hero")}
                 src={screen("hero")}
                 alt="Saturn — écran d'accueil"
-                onLoad={(e) => { (e.target as HTMLImageElement).classList.add("saturn-img--loaded") }}
-                onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }}
               />
               <div className="saturn-mockup-placeholder">
                 <span>saturn.skymdev.fr</span>
@@ -322,8 +331,6 @@ export default function SaturnPage() {
                 key={screen("login")}
                 src={screen("login")}
                 alt="Saturn — interface de connexion"
-                onLoad={(e) => { (e.target as HTMLImageElement).classList.add("saturn-img--loaded") }}
-                onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }}
               />
               <div className="saturn-screen-placeholder"><span>Demandes de convoi</span></div>
             </div>
@@ -364,8 +371,6 @@ export default function SaturnPage() {
                 key={screen("flux")}
                 src={screen("flux")}
                 alt="Saturn — flux logistiques"
-                onLoad={(e) => { (e.target as HTMLImageElement).classList.add("saturn-img--loaded") }}
-                onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }}
               />
               <div className="saturn-screen-placeholder"><span>Flux logistiques</span></div>
             </div>
@@ -397,8 +402,6 @@ export default function SaturnPage() {
                 key={screen("stock")}
                 src={screen("stock")}
                 alt="Saturn — tournées chauffeurs"
-                onLoad={(e) => { (e.target as HTMLImageElement).classList.add("saturn-img--loaded") }}
-                onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }}
               />
               <div className="saturn-screen-placeholder"><span>Gestion des tournées</span></div>
             </div>
@@ -430,8 +433,6 @@ export default function SaturnPage() {
                 key={screen("interface")}
                 src={screen("interface")}
                 alt="Saturn — localisation de véhicule"
-                onLoad={(e) => { (e.target as HTMLImageElement).classList.add("saturn-img--loaded") }}
-                onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }}
               />
               <div className="saturn-screen-placeholder"><span>Localisation véhicule</span></div>
             </div>

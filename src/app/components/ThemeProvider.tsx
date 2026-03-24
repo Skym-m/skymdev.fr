@@ -11,9 +11,8 @@ export function useTheme() {
 }
 
 function computeTheme(): Theme {
-  return 'day' // TEST — forcer le mode jour
-  // const h = new Date().getHours()
-  // return h >= 8 && h < 18 ? 'day' : 'night'
+  const h = new Date().getHours()
+  return h >= 8 && h < 18 ? 'day' : 'night'
 }
 
 export default function ThemeProvider({ children }: { children: ReactNode }) {
