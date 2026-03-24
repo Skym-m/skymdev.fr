@@ -11,18 +11,21 @@
     "@portabletext/react": "^6.0.0",
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^4.21.0",
+    "gsap": "^3.14.2",
     "jsdom": "^27.3.0",
     "next": "16.0.10",
     "next-sanity": "^11.6.10",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "sanity": "^4.21.0",
-    "styled-components": "^6.1.19"
+    "styled-components": "^6.1.19",
+    "three": "^0.183.2"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "baseline-browser-mapping": "^2.10.0",
     "typescript": "^5"
   }
 }

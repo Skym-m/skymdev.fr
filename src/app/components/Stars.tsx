@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react"
+import { useTheme } from "./ThemeProvider"
 
 type Star = {
     top: string
@@ -18,6 +19,7 @@ type ShootingStar = {
 }
 
 export default function StarsBackground({ count = 60 }) {
+    const theme = useTheme()
     const [stars, setStars] = useState<Star[]>([])
     const [shootingStar, setShootingStar] = useState<ShootingStar | null>(null)
 
@@ -26,7 +28,7 @@ export default function StarsBackground({ count = 60 }) {
             top: `${Math.random() * 100}%`,
             left: `${Math.random() * 100}%`,
             size: `${Math.random() * 2 + 1}px`,
-            duration: `${Math.random() + 2}s`,
+            duration: `${Math.random() * 1.4 + 2.2}s`,
             delay: `${Math.random() * 3}s`,
         }))
         setStars(generatedStars)
@@ -36,8 +38,8 @@ export default function StarsBackground({ count = 60 }) {
         const interval = setInterval(() => {
             setShootingStar({
                 id: Date.now(),
-                top: Math.random() * 60 + 10,
-                angle: Math.random() * 60 - 30,
+                top: Math.random() * 40 + 5,
+                angle: Math.random() * 25 + 15,
                 isColorful: Math.random() < 0.3,
             })
             setTimeout(() => setShootingStar(null), 2200)
@@ -45,7 +47,9 @@ export default function StarsBackground({ count = 60 }) {
         return () => clearInterval(interval)
     }, [])
 
-    return (
+if (theme === 'day') return null
+
+return (
         <div className="stars-background">
             {stars.map((star, i) => (
                 <div
@@ -62,20 +66,16 @@ export default function StarsBackground({ count = 60 }) {
                 />
             ))}
 
-            {shootingStar && (
+{shootingStar && (
                 <div
-                    key={shootingStar.id}
+                    key={`shooting-${shootingStar.id}`}
                     className={`shooting-star ${shootingStar.isColorful ? 'multicolor' : ''}`}
                     style={{
                         top: `${shootingStar.top}%`,
-                        transform: `rotate(${shootingStar.angle}deg)`,
-                        animation: 'shoot 2s ease-in-out forwards',
-                    }}
+                        ['--shoot-angle' as string]: `${shootingStar.angle}deg`,
+                    } as React.CSSProperties}
                 />
             )}
-
-            {/* Lune fixe en haut à droite */}
-            <div className="moon" />
         </div>
     )
 }
