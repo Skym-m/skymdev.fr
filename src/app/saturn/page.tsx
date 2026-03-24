@@ -568,9 +568,9 @@ export default function SaturnPage() {
           <p className="saturn-closing__sub">
             Un système conçu pour des concessions automobiles, de A à Z. Pas un abonnement à un logiciel que personne ne comprend. Juste ce qu'il faut, là où il faut.
           </p>
-          <Link href="/" className="saturn-closing__back">
-            Retour au portfolio
-          </Link>
+          <a href="mailto:yannis.perrier@icloud.com" className="saturn-closing__back">
+            Contact
+          </a>
         </div>
       </section>
     </div>
