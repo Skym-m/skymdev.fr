@@ -1067,13 +1067,13 @@ a {
 
   /* Saturn — réductions mobile */
   .saturn-statement {
-    padding-top: 3.5rem;
-    padding-bottom: 3.5rem;
+    min-height: auto;
+    padding: 3.5rem 1.5rem;
   }
 
   .saturn-statement--sm {
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
+    min-height: auto;
+    padding: 2.5rem 1.5rem;
   }
 
   .saturn-avail__card {
@@ -1276,6 +1276,7 @@ a {
   position: relative;
   z-index: 2;
   min-height: 100vh;
+  background: var(--bg);
 }
 
 /* Nav */
@@ -1323,6 +1324,7 @@ a {
   padding: 8rem 1.5rem 4rem;
   overflow: hidden;
   text-align: center;
+  background: var(--bg);
 }
 
 .saturn-hero__bg {
@@ -1362,7 +1364,6 @@ a {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: riseIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .saturn-hero__sub {
@@ -1371,14 +1372,12 @@ a {
   font-weight: 500;
   line-height: 1.3;
   color: rgba(210, 225, 255, 0.85);
-  animation: riseIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
 }
 
 .saturn-hero__tagline {
   margin: 1rem 0 0;
   color: var(--text-muted);
   font-size: clamp(0.95rem, 1.6vw, 1.15rem);
-  animation: riseIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
 }
 
 .saturn-hero__mockup {
@@ -1494,16 +1493,166 @@ a {
   opacity: 1;
 }
 
+/* ── Shimmer sweep on hero title ── */
+.saturn-hero__title {
+  position: relative;
+  overflow: hidden;
+}
+
+.saturn-hero__shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.35) 45%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.35) 55%,
+    transparent 80%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  pointer-events: none;
+  opacity: 0;
+}
+
+@keyframes shimmerSweep {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* ── Floating glow behind hero mockup ── */
+.saturn-hero__glow {
+  position: absolute;
+  width: 80%;
+  height: 60%;
+  bottom: -15%;
+  left: 10%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(80, 120, 255, 0.25) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  animation: heroGlowPulse 4s ease-in-out infinite alternate;
+  will-change: opacity, transform;
+}
+
+@keyframes heroGlowPulse {
+  0%   { opacity: 0.5; transform: scale(1) translateY(0); }
+  100% { opacity: 0.85; transform: scale(1.08) translateY(-8px); }
+}
+
+/* ── Section divider lines ── */
+.saturn-divider {
+  display: block;
+  width: 0;
+  height: 1px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, rgba(100, 140, 255, 0.35), transparent);
+  border: none;
+  will-change: width;
+}
+
+/* ── Mouse-follow glow on cards ── */
+.saturn-role,
+.saturn-avail__card,
+.saturn-cap {
+  position: relative;
+  overflow: hidden;
+}
+
+.saturn-card-glow {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(100, 150, 255, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 300ms ease;
+  will-change: transform, opacity;
+  z-index: 0;
+}
+
+.saturn-role > *:not(.saturn-card-glow),
+.saturn-avail__card > *:not(.saturn-card-glow),
+.saturn-cap > *:not(.saturn-card-glow) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── 3D perspective on screen frames ── */
+.saturn-feature__visual {
+  perspective: 1200px;
+}
+
+.saturn-screen-frame {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: box-shadow 400ms ease;
+}
+
+/* ── Shine sweep on screen frames ── */
+.saturn-screen-shine {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.06) 48%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.06) 52%,
+    transparent 70%
+  );
+  background-size: 250% 100%;
+  opacity: 0;
+}
+
+@keyframes screenShine {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* ── Closing gradient animation ── */
+.saturn-closing__title {
+  background-size: 200% 200%;
+}
+
+@keyframes closingGradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Hero mockup 3D perspective ── */
+.saturn-hero__mockup {
+  perspective: 1400px;
+}
+
+.saturn-mockup-shell {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
 /* Spans word-by-word pour les statements */
 .sw {
   display: inline;
-  will-change: opacity;
+  will-change: opacity, filter;
 }
 
 /* Statement sections */
 .saturn-statement {
-  padding: clamp(6rem, 12vw, 10rem) 1.5rem;
+  min-height: clamp(24rem, 72vh, 46rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
   text-align: center;
+  background: var(--bg);
 }
 
 .saturn-statement__inner {
@@ -1537,7 +1686,7 @@ a {
 }
 
 .saturn-statement--sm {
-  padding: clamp(4rem, 8vw, 7rem) 1.5rem;
+  min-height: clamp(20rem, 58vh, 34rem);
 }
 
 .saturn-statement__quote {
@@ -1649,6 +1798,213 @@ a {
   }
 }
 
+/* ── Features Showcase (pinned crossfade) ── */
+.saturn-showcase {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.saturn-showcase__inner {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+}
+
+.saturn-showcase__copy-track {
+  position: relative;
+  min-height: 420px;
+}
+
+.saturn-showcase-copy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(28px);
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: opacity 320ms ease, transform 320ms ease;
+}
+
+.saturn-showcase-copy.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.saturn-showcase__screen {
+  perspective: 1200px;
+}
+
+.saturn-showcase__frame {
+  position: relative;
+  border-radius: 14px;
+  border: 1px solid rgba(100, 140, 255, 0.15);
+  overflow: hidden;
+  aspect-ratio: 2880 / 1616;
+  background: rgba(12, 20, 42, 0.2);
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.saturn-showcase-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0;
+  transform: scale(1.02);
+  will-change: opacity, transform;
+  transition: opacity 360ms ease, transform 360ms ease;
+}
+
+.saturn-showcase-img.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.saturn-showcase__frame .saturn-screen-placeholder {
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.saturn-showcase__progress {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(300px, 40%);
+  height: 2px;
+  background: rgba(100, 140, 255, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.saturn-showcase__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, rgba(100, 140, 255, 0.6), rgba(150, 185, 255, 0.8));
+  border-radius: 999px;
+  transform-origin: left;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .saturn-hero {
+    padding-top: 5.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .saturn-hero__title {
+    font-size: clamp(3.5rem, 15vw, 5rem);
+  }
+
+  .saturn-hero__mockup {
+    margin-top: 2.5rem;
+  }
+
+  .saturn-statement {
+    min-height: auto;
+    padding: 3.5rem 1.5rem;
+  }
+
+  .saturn-statement--sm {
+    min-height: auto;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .saturn-statement__line {
+    font-size: clamp(2.4rem, 12vw, 3.6rem);
+  }
+
+  .saturn-statement__accent,
+  .saturn-statement__accent .sw {
+    white-space: normal;
+  }
+
+  .saturn-showcase {
+    height: auto;
+    overflow: visible;
+    padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 3rem);
+  }
+
+  .saturn-showcase__inner {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 2rem;
+  }
+
+  .saturn-showcase__copy-track {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .saturn-showcase-copy {
+    position: relative;
+    inset: auto;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .saturn-showcase__screen {
+    order: -1;
+  }
+
+  .saturn-showcase__frame {
+    aspect-ratio: 2880 / 1616;
+    min-height: 0;
+  }
+
+  .saturn-showcase-img:first-child,
+  .saturn-showcase-img.is-active {
+    opacity: 1;
+    transform: none;
+  }
+
+  .saturn-showcase__progress {
+    display: none;
+  }
+
+  .saturn-roles__grid,
+  .saturn-caps__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .saturn-role {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .saturn-avail__card {
+    padding: 1.5rem;
+  }
+
+  .saturn-cap {
+    padding: 1.25rem;
+  }
+
+  .saturn-tech__pill {
+    padding: 0.45rem 0.85rem;
+  }
+}
+
 /* Capabilities grid */
 .saturn-caps {
   padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 3rem);
@@ -1705,12 +2061,31 @@ a {
 
 /* Closing */
 .saturn-closing {
+  position: relative;
   padding: clamp(3rem, 6vw, 5rem) 1.5rem;
   text-align: center;
   border-top: 1px solid rgba(100, 140, 255, 0.08);
+  overflow: hidden;
+  background: none;
+}
+
+.saturn-closing::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    #060b18 0%,
+    rgba(6, 11, 24, 0.94) 58%,
+    rgba(6, 11, 24, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
 }
 
 .saturn-closing__inner {
+  position: relative;
+  z-index: 1;
   max-width: 700px;
   margin: 0 auto;
   display: flex;
@@ -1734,11 +2109,11 @@ a {
   font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 0.9;
-  background: linear-gradient(160deg, rgba(255,255,255,0.15) 0%, rgba(100,140,255,0.08) 100%);
+  background: linear-gradient(160deg, #ffffff 0%, #d4e4ff 40%, #8ab0ff 80%, #6090f0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  -webkit-text-stroke: 1px rgba(150, 185, 255, 0.25);
+  will-change: transform, opacity;
 }
 
 .saturn-closing__sub {
@@ -2626,9 +3001,62 @@ a {
   color: rgba(0, 55, 150, 0.28);
 }
 
+/* Glow & dividers */
+[data-theme="day"] .saturn-hero__glow {
+  background: radial-gradient(ellipse, rgba(18, 84, 174, 0.12) 0%, transparent 70%);
+}
+
+[data-theme="day"] .saturn-divider {
+  background: linear-gradient(90deg, transparent, rgba(0, 78, 195, 0.2), transparent);
+}
+
+[data-theme="day"] .saturn-card-glow {
+  background: radial-gradient(circle, rgba(18, 84, 174, 0.1) 0%, transparent 70%);
+}
+
+[data-theme="day"] .saturn-hero__shimmer {
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.6) 45%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0.6) 55%,
+    transparent 80%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 200% 100%;
+}
+
+/* Features Showcase */
+[data-theme="day"] .saturn-showcase__frame {
+  border-color: rgba(0, 78, 195, 0.12);
+  background: rgba(215, 235, 252, 0.28);
+  box-shadow:
+    0 32px 80px rgba(0, 55, 155, 0.18),
+    0 0 0 1px rgba(0, 78, 195, 0.03) inset;
+}
+
+[data-theme="day"] .saturn-showcase__progress {
+  background: rgba(0, 78, 195, 0.08);
+}
+
+[data-theme="day"] .saturn-showcase__progress-fill {
+  background: linear-gradient(90deg, rgba(18, 84, 174, 0.5), rgba(30, 100, 200, 0.7));
+}
+
 /* Closing */
 [data-theme="day"] .saturn-closing {
   border-top-color: rgba(0, 78, 195, 0.07);
+}
+
+[data-theme="day"] .saturn-closing::before {
+  background: linear-gradient(
+    180deg,
+    #c8e4f5 0%,
+    rgba(200, 228, 245, 0.92) 58%,
+    rgba(200, 228, 245, 0) 100%
+  );
 }
 
 [data-theme="day"] .saturn-closing__eyebrow {
@@ -2636,10 +3064,9 @@ a {
 }
 
 [data-theme="day"] .saturn-closing__title {
-  background: linear-gradient(160deg, rgba(0, 55, 145, 0.1) 0%, rgba(0, 75, 195, 0.05) 100%);
+  background: linear-gradient(160deg, #0c2550 0%, #1a4fa8 40%, #2567c4 80%, #1254ae 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-stroke: 1px rgba(0, 75, 175, 0.2);
 }
 
 [data-theme="day"] .saturn-closing__back {
