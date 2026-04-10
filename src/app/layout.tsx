@@ -22,7 +22,12 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="fr" className={poppins.className} suppressHydrationWarning>
+        <html
+          lang="fr"
+          className={poppins.className}
+          data-scroll-behavior="smooth"
+          suppressHydrationWarning
+        >
         <head>
           {/* Inline script to set data-theme before first paint to avoid CSS flash */}
           <script dangerouslySetInnerHTML={{__html: `(function(){var h=new Date().getHours();document.documentElement.setAttribute('data-theme',h>=8&&h<18?'day':'night');})();`}} />

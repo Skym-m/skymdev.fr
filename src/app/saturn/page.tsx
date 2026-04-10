@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useRef, useCallback } from "react"
 import { gsap } from "gsap"
@@ -65,6 +66,7 @@ const FEATURES = [
 export default function SaturnPage() {
   const theme = useTheme()
   const cardGlowCleanup = useRef<(() => void) | null>(null)
+  const glowCleanupMapRef = useRef(new WeakMap<HTMLElement, () => void>())
 
   const screen = (name: string) =>
     theme === "day" ? `/saturn/${name}-day.png` : `/saturn/${name}.png`
@@ -92,15 +94,16 @@ export default function SaturnPage() {
 
       card.addEventListener("mousemove", onMove)
       card.addEventListener("mouseleave", onLeave)
-      ;(card as any).__glowCleanup = () => {
+      glowCleanupMapRef.current.set(card, () => {
         card.removeEventListener("mousemove", onMove)
         card.removeEventListener("mouseleave", onLeave)
-      }
+      })
     })
 
     return () => {
       cards.forEach((card) => {
-        ;(card as any).__glowCleanup?.()
+        glowCleanupMapRef.current.get(card)?.()
+        glowCleanupMapRef.current.delete(card)
         card.querySelector(".saturn-card-glow")?.remove()
       })
     }
@@ -585,10 +588,14 @@ export default function SaturnPage() {
               <span />
             </div>
             <div className="saturn-mockup-screen">
-              <img
+              <Image
                 key={screen("hero")}
+                className="saturn-hero-image"
                 src={screen("hero")}
                 alt="Saturn — écran d'accueil"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 960px"
               />
               <div className="saturn-mockup-placeholder">
                 <span>saturn.skymdev.fr</span>
@@ -640,12 +647,14 @@ export default function SaturnPage() {
           <div className="saturn-showcase__screen">
             <div className="saturn-showcase__frame">
               {FEATURES.map((f, i) => (
-                <img
+                <Image
                   className="saturn-showcase-img"
                   data-idx={i}
                   key={screen(f.img)}
                   src={screen(f.img)}
                   alt={f.alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               ))}
               <div className="saturn-screen-placeholder">

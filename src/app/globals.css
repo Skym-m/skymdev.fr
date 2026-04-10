@@ -201,26 +201,29 @@ a {
 
 .hero-clouds {
   position: absolute;
-  inset: 0;
+  inset: -6rem -8vw -5rem;
   pointer-events: none;
   z-index: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero-cloud {
   position: absolute;
+  display: block;
+  overflow: visible;
+  transform: translateZ(0);
 }
 
 .hero-cloud--1 {
-  top: 1rem;
-  left: 0;
+  top: 0;
+  left: -3vw;
   width: clamp(24rem, 42vw, 44rem);
   animation: driftAura 16s ease-in-out infinite alternate;
 }
 
 .hero-cloud--2 {
-  right: 0;
-  bottom: 1rem;
+  right: -5vw;
+  bottom: -2rem;
   width: clamp(30rem, 50vw, 54rem);
   animation: driftAura 22s ease-in-out infinite alternate-reverse;
 }
@@ -449,10 +452,12 @@ a {
 }
 
 .profile-image {
+  display: block;
+  height: auto;
+  max-width: 100%;
   width: 100%;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
-  object-fit: cover;
 }
 
 .projects-grid {
@@ -597,6 +602,7 @@ a {
 }
 
 .top_left {
+  position: relative;
   grid-area: visual;
   min-height: 18rem;
   overflow: hidden;

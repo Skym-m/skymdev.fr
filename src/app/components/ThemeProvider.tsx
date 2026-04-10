@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState, ReactNode } from "react"
+import { createContext, useContext, useSyncExternalStore, type ReactNode } from "react"
 
 export type Theme = 'day' | 'night'
 
@@ -15,14 +15,32 @@ function computeTheme(): Theme {
   return h >= 8 && h < 18 ? 'day' : 'night'
 }
 
-export default function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('night')
+function subscribe(onStoreChange: () => void) {
+  window.addEventListener('focus', onStoreChange)
+  document.addEventListener('visibilitychange', onStoreChange)
 
-  useEffect(() => {
-    const t = computeTheme()
-    setTheme(t)
-    document.documentElement.setAttribute('data-theme', t)
-  }, [])
+  return () => {
+    window.removeEventListener('focus', onStoreChange)
+    document.removeEventListener('visibilitychange', onStoreChange)
+  }
+}
+
+function getSnapshot(): Theme {
+  const attribute = document.documentElement.getAttribute('data-theme')
+
+  if (attribute === 'day' || attribute === 'night') {
+    return attribute
+  }
+
+  return computeTheme()
+}
+
+function getServerSnapshot(): Theme {
+  return 'night'
+}
+
+export default function ThemeProvider({ children }: { children: ReactNode }) {
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 
   return (
     <ThemeContext.Provider value={theme}>

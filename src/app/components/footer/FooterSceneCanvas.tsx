@@ -57,6 +57,12 @@ export type FooterSceneCanvasProps = {
   reducedMotion: boolean
 }
 
+type FireflyMaterial = THREE.ShaderMaterial
+type FireflyPoints = THREE.Points<THREE.BufferGeometry, FireflyMaterial>
+type GrassMaterial = THREE.ShaderMaterial
+type GrassMesh = THREE.InstancedMesh<THREE.PlaneGeometry, GrassMaterial>
+type TerrainMesh = THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>
+
 type FireflyData = {
   altitudeMax: number
   altitudeMin: number
@@ -75,15 +81,15 @@ type FireflyData = {
 type FireflySystem = {
   alphas: Float32Array
   data: FireflyData[]
-  geometry: any
-  material: any
-  points: any
+  geometry: THREE.BufferGeometry
+  material: FireflyMaterial
+  points: FireflyPoints
   positions: Float32Array
   scales: Float32Array
 }
 
 type GrassInstanceData = {
-  color: any
+  color: THREE.Color
   height: number
   lean: number
   rotationY: number
@@ -330,7 +336,7 @@ function createTerrainMesh() {
     depthWrite: false,
     opacity: 0.78,
   })
-  const mesh = new THREE.Mesh(geometry, material)
+  const mesh: TerrainMesh = new THREE.Mesh(geometry, material)
 
   mesh.rotation.x = -Math.PI / 2
   mesh.position.set(0, baseY, terrainOffsetZ)
@@ -347,7 +353,7 @@ function createFireflySystem(count: number) {
   const alphas = new Float32Array(count)
   const geometry = new THREE.BufferGeometry()
 
-    for (let index = 0; index < count; index += 1) {
+  for (let index = 0; index < count; index += 1) {
     const lane = Math.pow(random(), 1.18)
     const side = random() < 0.5 ? -1 : 1
     const x = side * lerp(0.55, 5.4, Math.pow(random(), 1.5))
@@ -536,9 +542,13 @@ export default function FooterSceneCanvas({
       FOOTER_SCENE_CONFIG.grass.heightSegments,
     )
     const foregroundGeometry = meadowGeometry.clone()
-    const shapeBladeGeometry = (geometry: any, widthBoost: number, curveBoost: number) => {
-      const bladePositions = geometry.attributes.position
-      const bladeUvs = geometry.attributes.uv
+    const shapeBladeGeometry = (
+      geometry: THREE.PlaneGeometry,
+      widthBoost: number,
+      curveBoost: number,
+    ) => {
+      const bladePositions = geometry.attributes.position as THREE.BufferAttribute
+      const bladeUvs = geometry.attributes.uv as THREE.BufferAttribute
 
       for (let index = 0; index < bladePositions.count; index += 1) {
         const y = bladeUvs.getY(index)
@@ -610,7 +620,11 @@ export default function FooterSceneCanvas({
 
     container.replaceChildren(renderer.domElement)
 
-    const applyGrassLayer = (mesh: any, instances: GrassInstanceData[], renderOrder: number) => {
+    const applyGrassLayer = (
+      mesh: GrassMesh,
+      instances: GrassInstanceData[],
+      renderOrder: number,
+    ) => {
       const instanceSeed = new Float32Array(instances.length)
       const instanceLean = new Float32Array(instances.length)
       const instanceColor = new Float32Array(instances.length * 3)
@@ -796,7 +810,7 @@ export default function FooterSceneCanvas({
       fireflies.geometry.dispose()
       fireflies.material.dispose()
       terrainMesh.geometry.dispose()
-      ;(terrainMesh.material as any).dispose()
+      terrainMesh.material.dispose()
       meadowGeometry.dispose()
       foregroundGeometry.dispose()
       meadowMaterial.dispose()

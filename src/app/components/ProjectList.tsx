@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useId, useState } from 'react'
-import { urlFor } from '@/sanity/lib/image'
+import Image from 'next/image'
+import { useEffect, useId, useRef, useState } from 'react'
+import { getSanityImageUrl } from '@/sanity/lib/image'
 import { PortableText } from '@portabletext/react'
 
 import type { Project } from '@/app/types/project'
@@ -16,29 +17,93 @@ type ProjectListProps = {
   projects: Project[]
 }
 
+const FOCUSABLE_SELECTOR = [
+  'a[href]',
+  'button:not([disabled])',
+  'textarea:not([disabled])',
+  'input:not([disabled])',
+  'select:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])',
+].join(', ')
+
 export default function ProjectList({ projects }: ProjectListProps) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const titleId = useId()
   const descriptionId = useId()
+  const dialogRef = useRef<HTMLDivElement | null>(null)
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null)
+  const lastFocusedElementRef = useRef<HTMLElement | null>(null)
+  const previousBodyOverflowRef = useRef<string | null>(null)
+  const modalImageUrl = selectedProject?.image
+    ? getSanityImageUrl(selectedProject.image, { width: 1800, quality: 86 })
+    : null
 
   useEffect(() => {
     if (!selectedProject) {
-      document.body.style.removeProperty('overflow')
       return
     }
+
+    lastFocusedElementRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null
+    previousBodyOverflowRef.current = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    closeButtonRef.current?.focus()
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setSelectedProject(null)
+        return
+      }
+
+      if (event.key !== 'Tab') {
+        return
+      }
+
+      const dialog = dialogRef.current
+      if (!dialog) {
+        return
+      }
+
+      const focusableElements = Array.from(
+        dialog.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+      ).filter((element) => {
+        const styles = window.getComputedStyle(element)
+
+        return styles.display !== 'none' && styles.visibility !== 'hidden'
+      })
+
+      if (focusableElements.length === 0) {
+        event.preventDefault()
+        dialog.focus()
+        return
+      }
+
+      const firstElement = focusableElements[0]
+      const lastElement = focusableElements[focusableElements.length - 1]
+      const activeElement =
+        document.activeElement instanceof HTMLElement ? document.activeElement : null
+
+      if (event.shiftKey && (activeElement === firstElement || activeElement === dialog)) {
+        event.preventDefault()
+        lastElement.focus()
+      } else if (!event.shiftKey && activeElement === lastElement) {
+        event.preventDefault()
+        firstElement.focus()
       }
     }
 
-    document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      document.body.style.removeProperty('overflow')
       window.removeEventListener('keydown', handleKeyDown)
+
+      if (previousBodyOverflowRef.current) {
+        document.body.style.overflow = previousBodyOverflowRef.current
+      } else {
+        document.body.style.removeProperty('overflow')
+      }
+
+      lastFocusedElementRef.current?.focus()
     }
   }, [selectedProject])
 
@@ -49,30 +114,36 @@ export default function ProjectList({ projects }: ProjectListProps) {
           <p className="section-eyebrow">Travaux</p>
           <h2>Tous mes projets</h2>
           {projects.length === 0 ? (
-            <p className="empty-state">Aucun projet n'est disponible pour le moment.</p>
+            <p className="empty-state">Aucun projet n&apos;est disponible pour le moment.</p>
           ) : (
             <div className="projects-grid">
-              {projects.map((project) => (
-                <button
-                  key={project._id}
-                  type="button"
-                  className="project-card"
-                  onClick={() => setSelectedProject(project)}
-                  style={{
-                    backgroundImage: project.image ? `url(${urlFor(project.image).url()})` : 'none',
-                  }}
-                >
-                  <span className="project-card__overlay" />
-                  <span className="project-card__content">
-                    <span className="project-card__title">{project.title}</span>
-                    <span className="project-card__meta">
-                      {project.date
-                        ? `Création : ${dateFormatter.format(new Date(project.date))}`
-                        : 'Date inconnue'}
+              {projects.map((project) => {
+                const cardImageUrl = project.image
+                  ? getSanityImageUrl(project.image, { width: 1200, quality: 82 })
+                  : null
+
+                return (
+                  <button
+                    key={project._id}
+                    type="button"
+                    className="project-card"
+                    onClick={() => setSelectedProject(project)}
+                    style={{
+                      backgroundImage: cardImageUrl ? `url("${cardImageUrl}")` : 'none',
+                    }}
+                  >
+                    <span className="project-card__overlay" />
+                    <span className="project-card__content">
+                      <span className="project-card__title">{project.title}</span>
+                      <span className="project-card__meta">
+                        {project.date
+                          ? `Création : ${dateFormatter.format(new Date(project.date))}`
+                          : 'Date inconnue'}
+                      </span>
                     </span>
-                  </span>
-                </button>
-              ))}
+                  </button>
+                )
+              })}
             </div>
           )}
         </div>
@@ -82,13 +153,19 @@ export default function ProjectList({ projects }: ProjectListProps) {
         <div
           className="project_modal"
           onClick={() => setSelectedProject(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby={titleId}
-          aria-describedby={descriptionId}
         >
-          <div className="modal_grid" onClick={(event) => event.stopPropagation()}>
+          <div
+            ref={dialogRef}
+            className="modal_grid"
+            onClick={(event) => event.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={titleId}
+            aria-describedby={descriptionId}
+            tabIndex={-1}
+          >
             <button
+              ref={closeButtonRef}
               type="button"
               className="modal_close"
               onClick={() => setSelectedProject(null)}
@@ -97,8 +174,14 @@ export default function ProjectList({ projects }: ProjectListProps) {
               ×
             </button>
             <div className="top_left">
-              {selectedProject.image ? (
-                <img src={urlFor(selectedProject.image).url()} alt={selectedProject.title} />
+              {modalImageUrl ? (
+                <Image
+                  src={modalImageUrl}
+                  alt={selectedProject.title}
+                  fill
+                  unoptimized
+                  sizes="(max-width: 900px) 100vw, 60vw"
+                />
               ) : null}
             </div>
             <div className="top_right">

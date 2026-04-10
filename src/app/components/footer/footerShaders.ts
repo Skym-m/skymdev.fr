@@ -1,15 +1,15 @@
 import * as THREE from "three"
 
 export type GrassUniforms = {
-  uBaseColor: { value: any }
-  uDriftSpeed: { value: number }
-  uFogColor: { value: any }
-  uWindFrequency: { value: number }
-  uNoiseScale: { value: number }
-  uScrollProgress: { value: number }
-  uTime: { value: number }
-  uTipColor: { value: any }
-  uWindStrength: { value: number }
+  uBaseColor: THREE.IUniform<THREE.Color>
+  uDriftSpeed: THREE.IUniform<number>
+  uFogColor: THREE.IUniform<THREE.Color>
+  uWindFrequency: THREE.IUniform<number>
+  uNoiseScale: THREE.IUniform<number>
+  uScrollProgress: THREE.IUniform<number>
+  uTime: THREE.IUniform<number>
+  uTipColor: THREE.IUniform<THREE.Color>
+  uWindStrength: THREE.IUniform<number>
 }
 
 export function createGrassUniforms(colors: {

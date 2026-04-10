@@ -11,10 +11,24 @@ export default function HeroClouds() {
         overflow="visible"
       >
         <defs>
-          <filter id="c1-glow" x="-10%" y="-80%" width="130%" height="260%">
+          <filter
+            id="c1-glow"
+            x="-150"
+            y="-140"
+            width="760"
+            height="460"
+            filterUnits="userSpaceOnUse"
+          >
             <feGaussianBlur stdDeviation="22" />
           </filter>
-          <filter id="c1-body" x="-10%" y="-50%" width="130%" height="200%">
+          <filter
+            id="c1-body"
+            x="-140"
+            y="-120"
+            width="740"
+            height="420"
+            filterUnits="userSpaceOnUse"
+          >
             <feTurbulence
               type="fractalNoise"
               baseFrequency="0.018 0.028"
@@ -32,7 +46,14 @@ export default function HeroClouds() {
             />
             <feGaussianBlur in="displaced" stdDeviation="7" />
           </filter>
-          <filter id="c1-highlight" x="-10%" y="-40%" width="130%" height="180%">
+          <filter
+            id="c1-highlight"
+            x="-120"
+            y="-100"
+            width="700"
+            height="360"
+            filterUnits="userSpaceOnUse"
+          >
             <feGaussianBlur stdDeviation="4" />
           </filter>
         </defs>
@@ -76,10 +97,24 @@ export default function HeroClouds() {
         overflow="visible"
       >
         <defs>
-          <filter id="c2-glow" x="-10%" y="-70%" width="130%" height="240%">
+          <filter
+            id="c2-glow"
+            x="-170"
+            y="-150"
+            width="900"
+            height="520"
+            filterUnits="userSpaceOnUse"
+          >
             <feGaussianBlur stdDeviation="26" />
           </filter>
-          <filter id="c2-body" x="-10%" y="-50%" width="130%" height="200%">
+          <filter
+            id="c2-body"
+            x="-160"
+            y="-130"
+            width="880"
+            height="470"
+            filterUnits="userSpaceOnUse"
+          >
             <feTurbulence
               type="fractalNoise"
               baseFrequency="0.014 0.022"
@@ -97,7 +132,14 @@ export default function HeroClouds() {
             />
             <feGaussianBlur in="displaced" stdDeviation="9" />
           </filter>
-          <filter id="c2-highlight" x="-10%" y="-40%" width="130%" height="180%">
+          <filter
+            id="c2-highlight"
+            x="-140"
+            y="-110"
+            width="840"
+            height="400"
+            filterUnits="userSpaceOnUse"
+          >
             <feGaussianBlur stdDeviation="5" />
           </filter>
         </defs>

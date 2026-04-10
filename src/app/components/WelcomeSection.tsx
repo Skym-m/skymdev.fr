@@ -12,8 +12,8 @@ export default function WelcomeSection() {
             et univers numériques
           </h1>
           <p className="hero-copy">
-            SkymDev's portfolio, développeur indépendant passionné par le web,
-            le design et l'audiovisuel.
+            Portfolio de SkymDev, développeur indépendant passionné par le web,
+            le design et l&apos;audiovisuel.
           </p>
         </div>
     </section>

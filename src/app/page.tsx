@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 import ProjectList from "@/app/components/ProjectList"
 import WelcomeSection from "@/app/components/WelcomeSection"
 import {
@@ -15,7 +17,14 @@ export default async function Home() {
 
       <section id="about" className="content-section">
         <div className="section-shell about-layout">
-          <img className="profile-image" src="/skym.png" alt="Portrait de SkymDev" />
+          <Image
+            className="profile-image"
+            src="/skym.png"
+            alt="Portrait de SkymDev"
+            width={2268}
+            height={4030}
+            sizes="(max-width: 900px) 100vw, 300px"
+          />
           <div className="section-copy">
             <p className="section-eyebrow">Présentation</p>
             <h2>À propos de moi</h2>

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import { useTheme } from "./ThemeProvider"
 
 type Star = {
@@ -18,21 +18,32 @@ type ShootingStar = {
     isColorful: boolean
 }
 
+function seededUnit(seed: number) {
+    return Math.abs(Math.sin(seed * 12.9898) * 43758.5453) % 1
+}
+
+function formatUnit(value: number, unit: string) {
+    return `${value.toFixed(6)}${unit}`
+}
+
+function generateStars(count: number): Star[] {
+    return Array.from({ length: count }).map((_, index) => {
+        const seed = count * 97 + index * 17
+
+        return {
+            top: formatUnit(seededUnit(seed + 1) * 100, "%"),
+            left: formatUnit(seededUnit(seed + 2) * 100, "%"),
+            size: formatUnit(seededUnit(seed + 3) * 2 + 1, "px"),
+            duration: formatUnit(seededUnit(seed + 4) * 1.4 + 2.2, "s"),
+            delay: formatUnit(seededUnit(seed + 5) * 3, "s"),
+        }
+    })
+}
+
 export default function StarsBackground({ count = 60 }) {
     const theme = useTheme()
-    const [stars, setStars] = useState<Star[]>([])
+    const stars = useMemo(() => generateStars(count), [count])
     const [shootingStar, setShootingStar] = useState<ShootingStar | null>(null)
-
-    useEffect(() => {
-        const generatedStars = Array.from({ length: count }).map(() => ({
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            size: `${Math.random() * 2 + 1}px`,
-            duration: `${Math.random() * 1.4 + 2.2}s`,
-            delay: `${Math.random() * 3}s`,
-        }))
-        setStars(generatedStars)
-    }, [count])
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -47,9 +58,9 @@ export default function StarsBackground({ count = 60 }) {
         return () => clearInterval(interval)
     }, [])
 
-if (theme === 'day') return null
+    if (theme === 'day') return null
 
-return (
+    return (
         <div className="stars-background">
             {stars.map((star, i) => (
                 <div
@@ -66,13 +77,13 @@ return (
                 />
             ))}
 
-{shootingStar && (
+            {shootingStar && (
                 <div
                     key={`shooting-${shootingStar.id}`}
                     className={`shooting-star ${shootingStar.isColorful ? 'multicolor' : ''}`}
                     style={{
-                        top: `${shootingStar.top}%`,
-                        ['--shoot-angle' as string]: `${shootingStar.angle}deg`,
+                        top: formatUnit(shootingStar.top, "%"),
+                        ['--shoot-angle' as string]: formatUnit(shootingStar.angle, "deg"),
                     } as React.CSSProperties}
                 />
             )}
