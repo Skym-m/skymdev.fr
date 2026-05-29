@@ -30,6 +30,11 @@ export const footerLinks = [
     label: "Adresse e-mail",
     external: false,
   },
+  {
+    href: "/code",
+    label: "Observatoire du code",
+    external: false,
+  },
 ] as const
 
 export const footerCta = {

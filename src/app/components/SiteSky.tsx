@@ -2,11 +2,9 @@
 
 import { useEffect, useRef, useState } from "react"
 
-import { useTheme } from "./ThemeProvider"
 import MoonGlow from "./MoonGlow"
 import StarsBackground from "./Stars"
 import AirplaneTraffic from "./AirplaneTraffic"
-import DayClouds from "./DayClouds"
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max)
@@ -22,16 +20,9 @@ type SkyStyle = {
 }
 
 export default function SiteSky() {
-  const theme = useTheme()
-
   const [starsStyle, setStarsStyle] = useState<SkyStyle>({
     opacity: 0.86,
     transform: "translate3d(0, 0, 0) scale(1)",
-  })
-
-  const [cloudsStyle, setCloudsStyle] = useState<SkyStyle>({
-    opacity: 0.9,
-    transform: "translate3d(0, 0, 0)",
   })
 
   const rafRef = useRef(0)
@@ -63,13 +54,6 @@ export default function SiteSky() {
         transform: `translate3d(${starsX}vw, ${starsY}vh, 0) scale(${lerp(1, 1.03, progress)})`,
       })
 
-      // Nuages jour — dérivent légèrement vers le bas, plus lentement
-      const cloudY = lerp(0, 10, progress)
-      const cloudX = lerp(0, -1, progress)
-      setCloudsStyle({
-        opacity:   lerp(0.92, 0.72, progress),
-        transform: `translate3d(${cloudX}vw, ${cloudY}vh, 0)`,
-      })
     }
 
     const handleScroll = () => {
@@ -98,14 +82,6 @@ export default function SiteSky() {
       <div className="site-sky__stars" style={starsStyle}>
         <StarsBackground count={90} />
       </div>
-
-      {/* Nuages de fond — parallaxe doux vers le bas au scroll */}
-      {theme === 'day' && (
-        <div className="site-sky__clouds" style={cloudsStyle}>
-          {/* 8 nuages au lieu de 14 : même effet, moins de filtres blur simultanés */}
-          <DayClouds count={8} />
-        </div>
-      )}
 
       <MoonGlow />
       <AirplaneTraffic />

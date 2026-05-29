@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useMemo, useState } from "react"
-import { useTheme } from "./ThemeProvider"
 
 type Star = {
     top: string
@@ -41,7 +40,6 @@ function generateStars(count: number): Star[] {
 }
 
 export default function StarsBackground({ count = 60 }) {
-    const theme = useTheme()
     const stars = useMemo(() => generateStars(count), [count])
     const [shootingStar, setShootingStar] = useState<ShootingStar | null>(null)
 
@@ -57,8 +55,6 @@ export default function StarsBackground({ count = 60 }) {
         }, 8000)
         return () => clearInterval(interval)
     }, [])
-
-    if (theme === 'day') return null
 
     return (
         <div className="stars-background">

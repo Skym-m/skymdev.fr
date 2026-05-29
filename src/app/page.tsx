@@ -1,5 +1,6 @@
 import Image from "next/image"
 
+import HomeNav from "@/app/components/HomeNav"
 import ProjectList from "@/app/components/ProjectList"
 import WelcomeSection from "@/app/components/WelcomeSection"
 import {
@@ -13,6 +14,7 @@ export default async function Home() {
 
   return (
     <main>
+      <HomeNav />
       <WelcomeSection />
 
       <section id="about" className="content-section">

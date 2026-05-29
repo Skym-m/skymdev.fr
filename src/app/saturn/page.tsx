@@ -5,7 +5,6 @@ import Link from "next/link"
 import { useEffect, useRef, useCallback } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger"
-import { useTheme } from "../components/ThemeProvider"
 
 /* ── Features data ── */
 const FEATURES = [
@@ -64,12 +63,11 @@ const FEATURES = [
 ]
 
 export default function SaturnPage() {
-  const theme = useTheme()
   const cardGlowCleanup = useRef<(() => void) | null>(null)
   const glowCleanupMapRef = useRef(new WeakMap<HTMLElement, () => void>())
 
   const screen = (name: string) =>
-    theme === "day" ? `/saturn/${name}-day.png` : `/saturn/${name}.png`
+    `/saturn/${name}.png`
 
   // ── Mouse-follow glow for cards ──
   const initCardGlow = useCallback(() => {
@@ -545,7 +543,7 @@ export default function SaturnPage() {
       ScrollTrigger.getAll().forEach((t) => t.kill())
       cardGlowCleanup.current?.()
     }
-  }, [initCardGlow, theme])
+    }, [initCardGlow])
 
   return (
     <div className="saturn-page">

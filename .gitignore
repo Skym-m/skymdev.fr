@@ -23,6 +23,11 @@
 # misc
 .DS_Store
 *.pem
+.codex-secrets/
+.codex-*.png
+.env
+.env.*
+!.env.example
 
 # debug
 npm-debug.log*
