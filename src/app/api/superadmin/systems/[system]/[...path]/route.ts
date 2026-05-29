@@ -1,4 +1,4 @@
-import { requireGlobalSuperAdminSession } from "@/app/lib/superadmin/auth";
+import { readGlobalSuperAdminSession } from "@/app/lib/superadmin/auth";
 import { proxySuperAdminRequest } from "@/app/lib/superadmin/remote-api";
 
 export const dynamic = "force-dynamic";
@@ -46,7 +46,11 @@ async function handle(req: Request, context: RouteContext): Promise<Response> {
     return Response.json({ error: "Origine non autorisée." }, { status: 403 });
   }
 
-  const session = await requireGlobalSuperAdminSession();
+  const session = await readGlobalSuperAdminSession();
+  if (!session) {
+    return Response.json({ error: "Session superadmin expirée." }, { status: 401 });
+  }
+
   const { system, path } = await context.params;
 
   try {

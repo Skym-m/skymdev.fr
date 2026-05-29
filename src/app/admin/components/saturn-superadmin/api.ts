@@ -56,7 +56,18 @@ export async function apiFetchJson(
       },
       credentials: "include",
     });
-    return { res, data: await readJson(res) };
+    const data = await readJson(res);
+    if (res.ok && data.code === INVALID_API_RESPONSE.code) {
+      return {
+        res: new Response(JSON.stringify(data), {
+          status: 502,
+          headers: { "Content-Type": "application/json" },
+        }),
+        data,
+      };
+    }
+
+    return { res, data };
   } catch (error) {
     const detail = error instanceof Error ? error.message : "Erreur réseau inconnue.";
     const res = new Response(
