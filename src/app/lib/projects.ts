@@ -1,4 +1,5 @@
 import { client } from "@/sanity/lib/client"
+import { isSanityConfigured } from "@/sanity/env"
 
 import type { Project } from "@/app/types/project"
 
@@ -14,5 +15,9 @@ const projectsQuery = `*[_type == "project"] | order(date desc) {
 }`
 
 export async function getProjects() {
+  if (!isSanityConfigured) {
+    return []
+  }
+
   return client.fetch<Project[]>(projectsQuery)
 }
