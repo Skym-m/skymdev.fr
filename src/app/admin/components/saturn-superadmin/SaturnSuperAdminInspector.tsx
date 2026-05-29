@@ -647,12 +647,28 @@ export function SaturnSuperAdminInspector({
   onCreateCompany,
 }: SuperAdminInspectorProps) {
   const [activeSection, setActiveSection] = useState<SuperAdminInspectorSection>("configuration");
+  const [isCompactLayout, setIsCompactLayout] = useState(false);
+  const [showSectionModal, setShowSectionModal] = useState(false);
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [showCompanyModal, setShowCompanyModal] = useState(false);
 
   useEffect(() => {
+    const query = window.matchMedia("(max-width: 640px)");
+
+    function handleChange() {
+      setIsCompactLayout(query.matches);
+      if (!query.matches) setShowSectionModal(false);
+    }
+
+    handleChange();
+    query.addEventListener("change", handleChange);
+    return () => query.removeEventListener("change", handleChange);
+  }, []);
+
+  useEffect(() => {
     queueMicrotask(() => {
       setActiveSection("configuration");
+      setShowSectionModal(false);
       setShowAdminModal(false);
       setShowCompanyModal(false);
     });
@@ -692,6 +708,29 @@ export function SaturnSuperAdminInspector({
     [detail],
   );
 
+  const activeSectionLink =
+    sectionLinks.find((section) => section.id === activeSection) ?? sectionLinks[0];
+
+  function selectSection(sectionId: SuperAdminInspectorSection) {
+    setActiveSection(sectionId);
+    if (isCompactLayout) setShowSectionModal(true);
+  }
+
+  function openAdminModal() {
+    setShowSectionModal(false);
+    setShowAdminModal(true);
+  }
+
+  function openCompanyModal() {
+    setShowSectionModal(false);
+    setShowCompanyModal(true);
+  }
+
+  function openHardDeleteModal() {
+    setShowSectionModal(false);
+    onOpenHardDeleteModal();
+  }
+
   function renderActiveSection() {
     if (!detail) return null;
 
@@ -708,7 +747,7 @@ export function SaturnSuperAdminInspector({
           />
           <OrganizationDangerZoneSection
             selectedOrganization={selectedOrganization}
-            onOpenHardDeleteModal={onOpenHardDeleteModal}
+            onOpenHardDeleteModal={openHardDeleteModal}
           />
         </>
       );
@@ -729,7 +768,7 @@ export function SaturnSuperAdminInspector({
       return (
         <OrganizationCompaniesSection
           detail={detail}
-          onOpenCreateCompanyModal={() => setShowCompanyModal(true)}
+          onOpenCreateCompanyModal={openCompanyModal}
         />
       );
     }
@@ -737,7 +776,7 @@ export function SaturnSuperAdminInspector({
     return (
       <OrganizationAdminsSection
         detail={detail}
-        onOpenAddAdminModal={() => setShowAdminModal(true)}
+        onOpenAddAdminModal={openAdminModal}
       />
     );
   }
@@ -776,7 +815,7 @@ export function SaturnSuperAdminInspector({
                     className={`super-admin-section-tabs__button${
                       activeSection === section.id ? " is-active" : ""
                     }`}
-                    onClick={() => setActiveSection(section.id)}
+                    onClick={() => selectSection(section.id)}
                   >
                     <span>{section.eyebrow}</span>
                     <strong>{section.label}</strong>
@@ -785,7 +824,7 @@ export function SaturnSuperAdminInspector({
               </div>
 
               <div className="super-admin-inspector-content">
-                {renderActiveSection()}
+                {!isCompactLayout ? renderActiveSection() : null}
               </div>
             </>
           ) : null}
@@ -798,6 +837,21 @@ export function SaturnSuperAdminInspector({
           </div>
         </div>
       )}
+
+      {isCompactLayout && showSectionModal && detail ? (
+        <Modal
+          className="super-admin-modal super-admin-section-modal"
+          onClose={() => setShowSectionModal(false)}
+        >
+          <ModalHero
+            eyebrow={activeSectionLink.eyebrow}
+            title={activeSectionLink.label}
+            description={activeSectionLink.description}
+            className="super-admin-modal__header"
+          />
+          <div className="super-admin-section-modal__content">{renderActiveSection()}</div>
+        </Modal>
+      ) : null}
 
       {showAdminModal && detail ? (
         <AdminEditorModal

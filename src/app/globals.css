@@ -2472,6 +2472,11 @@ body:has(.global-admin-login)::after {
   border-radius: 8px;
 }
 
+.super-admin-section-modal__content {
+  display: grid;
+  gap: 0.75rem;
+}
+
 .saturn-superadmin-toast {
   border-color: var(--admin-border-strong);
   border-left: 3px solid var(--admin-accent);
@@ -2829,6 +2834,56 @@ body:has(.global-admin-login)::after {
   .global-admin-empty {
     min-height: 11rem;
     padding: 1.25rem;
+  }
+
+  .modal-overlay:has(.super-admin-section-modal) {
+    align-items: end;
+    padding: 0.5rem;
+  }
+
+  .super-admin-section-modal {
+    width: min(100%, 31rem);
+    max-height: min(88dvh, 760px);
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .super-admin-section-modal .modal__body {
+    gap: 0.8rem;
+    padding: 1rem 0.8rem 0.8rem;
+  }
+
+  .super-admin-section-modal .modal-hero__copy {
+    padding-right: 2.5rem;
+  }
+
+  .super-admin-section-modal .modal-hero__title {
+    font-size: 1.2rem;
+  }
+
+  .super-admin-section-modal .modal-hero__description {
+    font-size: 0.84rem;
+    line-height: 1.45;
+  }
+
+  .super-admin-section-modal .admin-partners__catalogSurface,
+  .super-admin-section-modal .dashboard-subpanel {
+    border-color: var(--admin-border);
+    background: var(--admin-surface-subtle);
+  }
+
+  .super-admin-section-modal .admin-partners__catalogSurface {
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .super-admin-section-modal .dashboard-panel__header {
+    display: none;
+  }
+
+  .super-admin-section-modal .dashboard-subpanel {
+    padding: 0.8rem;
   }
 }
 
