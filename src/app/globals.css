@@ -1820,6 +1820,1018 @@ body:has(.global-admin-login) .site-footer {
   }
 }
 
+/* Admin redesign: compact operations console */
+body:has(.global-admin-page),
+body:has(.global-admin-login) {
+  background:
+    linear-gradient(180deg, #111315 0%, #15181b 42%, #101214 100%),
+    #111315;
+}
+
+body:has(.global-admin-page)::before,
+body:has(.global-admin-page)::after,
+body:has(.global-admin-login)::before,
+body:has(.global-admin-login)::after {
+  display: none;
+}
+
+.global-admin-page,
+.global-admin-login {
+  --admin-bg: #111315;
+  --admin-bg-raised: #171a1d;
+  --admin-surface: #1d2125;
+  --admin-surface-strong: #22272b;
+  --admin-surface-subtle: #181c20;
+  --admin-surface-hover: #242a2f;
+  --admin-border: rgba(226, 232, 240, 0.1);
+  --admin-border-strong: rgba(226, 232, 240, 0.18);
+  --admin-row-border: rgba(226, 232, 240, 0.08);
+  --admin-text: #f4f7f8;
+  --admin-muted: #9aa6ad;
+  --admin-label: #dbe3e7;
+  --admin-accent: #6dd3c2;
+  --admin-accent-strong: #9fe7dc;
+  --admin-accent-bg: rgba(109, 211, 194, 0.11);
+  --admin-accent-border: rgba(109, 211, 194, 0.46);
+  --admin-primary-bg: #d9f7f1;
+  --admin-primary-text: #071312;
+  --admin-field-bg: #121619;
+  --admin-field-border: rgba(226, 232, 240, 0.13);
+  --admin-field-focus: rgba(109, 211, 194, 0.78);
+  --admin-field-hover-bg: #171d21;
+  --admin-option-bg: #171a1d;
+  --admin-select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23dbe3e7' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  --admin-feedback-bg: rgba(244, 176, 84, 0.1);
+  --admin-feedback-border: rgba(244, 176, 84, 0.3);
+  --admin-feedback-text: #ffd99a;
+  --admin-danger-bg: rgba(255, 101, 101, 0.1);
+  --admin-danger-border: rgba(255, 101, 101, 0.38);
+  --admin-danger-text: #ffb8b8;
+  --admin-danger-button-bg: #ff8585;
+  --admin-danger-button-text: #210606;
+  --admin-shadow: 0 20px 46px rgba(0, 0, 0, 0.28);
+  --admin-skeleton: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.13) 45%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  color: var(--admin-text);
+}
+
+.global-admin-page--app {
+  width: min(1760px, calc(100vw - 1.5rem));
+  min-height: 100svh;
+  padding: 0.75rem 0 1.5rem;
+}
+
+.global-admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.global-admin-page--app .global-admin-header {
+  top: 0.75rem;
+  margin-bottom: 0.85rem;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: rgba(23, 26, 29, 0.92);
+  padding: 0.7rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(14px);
+}
+
+.global-admin-header__brand,
+.global-admin-header__session {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.global-admin-header__mark {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border: 1px solid var(--admin-accent-border);
+  border-radius: 8px;
+  background: var(--admin-accent-bg);
+  color: var(--admin-accent-strong);
+  font-weight: 800;
+}
+
+.global-admin-page--app .global-admin-header h1 {
+  color: var(--admin-text);
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.global-admin-page--app .global-admin-header p,
+.global-admin-header__user {
+  color: var(--admin-muted);
+  font-size: 0.78rem;
+  line-height: 1.2;
+}
+
+.global-admin-header__user {
+  max-width: 34vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.global-admin-login {
+  min-height: 100svh;
+}
+
+.global-admin-login__panel {
+  width: min(460px, calc(100vw - 2rem));
+  border-radius: 8px;
+  background: var(--admin-surface);
+  padding: 2rem;
+}
+
+.global-admin-login__panel,
+.global-admin-box,
+.global-admin-directory,
+.global-admin-detail,
+.super-admin-panel,
+.super-admin-modal__section,
+.admin-sidebar-card,
+.dashboard-subpanel,
+.admin-partners__catalogSurface,
+.admin-partners__summaryItem,
+.admin-partners__relationshipCard,
+.super-admin-mobile-selector,
+.saturn-account-security__rows article,
+.saturn-account-security__timeline article,
+.saturn-account-security__facts article,
+.super-admin-account-card {
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-surface);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.global-admin-eyebrow,
+.dashboard-subpanel__eyebrow,
+.admin-sidebar-card__eyebrow,
+.admin-sidebar-link__eyebrow,
+.admin-partners__eyebrow,
+.super-admin-mobile-selector__label,
+.super-admin-org-card__meta,
+.super-admin-security-device__eyebrow {
+  color: var(--admin-accent-strong);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.global-admin-form label,
+.global-admin-box label,
+.admin-field,
+.super-admin-directory-search {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--admin-label);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.global-admin-form input,
+.global-admin-box input,
+.global-admin-box select,
+.global-admin-inline-form input,
+.admin-field input,
+.admin-field select,
+.super-admin-mobile-selector__select,
+.saturn-account-security__filters input,
+.saturn-account-security__filters select,
+.super-admin-directory-search input {
+  min-height: 2.55rem;
+  border: 1px solid var(--admin-field-border);
+  border-radius: 8px;
+  background: var(--admin-field-bg);
+  color: var(--admin-text);
+  padding: 0 0.75rem;
+  font-size: 0.9rem;
+  outline: none;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.global-admin-form input:hover,
+.global-admin-box input:hover,
+.global-admin-box select:hover,
+.global-admin-inline-form input:hover,
+.admin-field input:hover,
+.admin-field select:hover,
+.super-admin-mobile-selector__select:hover,
+.saturn-account-security__filters input:hover,
+.saturn-account-security__filters select:hover,
+.super-admin-directory-search input:hover {
+  background: var(--admin-field-hover-bg);
+}
+
+.global-admin-form input:focus,
+.global-admin-box input:focus,
+.global-admin-box select:focus,
+.global-admin-inline-form input:focus,
+.admin-field input:focus,
+.admin-field select:focus,
+.super-admin-mobile-selector__select:focus,
+.saturn-account-security__filters input:focus,
+.saturn-account-security__filters select:focus,
+.super-admin-directory-search input:focus {
+  border-color: var(--admin-field-focus);
+  box-shadow: 0 0 0 3px rgba(109, 211, 194, 0.13);
+}
+
+.global-admin-form button,
+.global-admin-box button,
+.global-admin-toolbar button,
+.global-admin-ghost-button,
+.global-admin-inline-form button,
+.dashboard-button,
+.admin-partners__formActions button,
+.modal-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: var(--admin-primary-bg);
+  color: var(--admin-primary-text);
+  padding: 0 0.95rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 140ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.global-admin-form button:hover:not(:disabled),
+.global-admin-box button:hover:not(:disabled),
+.global-admin-toolbar button:hover:not(:disabled),
+.dashboard-button:hover:not(:disabled),
+.admin-partners__formActions button:hover:not(:disabled),
+.modal-actions button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.global-admin-ghost-button,
+.global-admin-toolbar button,
+.dashboard-button--secondary {
+  border-color: var(--admin-border-strong);
+  background: var(--admin-surface-subtle);
+  color: var(--admin-text);
+}
+
+.global-admin-ghost-button:hover,
+.global-admin-toolbar button:hover:not(:disabled),
+.dashboard-button--secondary:hover:not(:disabled) {
+  border-color: var(--admin-accent-border);
+  background: var(--admin-accent-bg);
+}
+
+.dashboard-button--danger,
+.global-admin-danger button {
+  background: var(--admin-danger-button-bg);
+  color: var(--admin-danger-button-text);
+}
+
+.global-admin-feedback,
+.dashboard-inline-feedback,
+.dashboard-state-message {
+  border-radius: 8px;
+  font-size: 0.88rem;
+}
+
+.global-admin-system-shell {
+  gap: 0.65rem;
+}
+
+.global-admin-system-switchbar {
+  justify-content: flex-end;
+}
+
+.global-admin-tabs {
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(7.5rem, 1fr));
+  width: fit-content;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-surface-subtle);
+}
+
+.global-admin-tabs button {
+  min-height: 2.3rem;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--admin-muted);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.global-admin-tabs button:hover,
+.global-admin-tabs button:focus-visible,
+.global-admin-tabs button.is-active {
+  border-color: var(--admin-accent-border);
+  background: var(--admin-accent-bg);
+  color: var(--admin-text);
+  outline: none;
+}
+
+.saturn-superadmin-shell {
+  --dash-surface: var(--admin-surface);
+  --dash-surface-strong: var(--admin-surface-strong);
+  --dash-border: var(--admin-border);
+  --dash-border-strong: var(--admin-border-strong);
+  --dash-text: var(--admin-text);
+  --dash-muted: var(--admin-muted);
+  --dash-accent: var(--admin-accent);
+  --dash-focus-outline: 2px solid var(--admin-field-focus);
+  --dash-interactive-shadow-strong: var(--admin-shadow);
+  --modal-panel-highlight: rgba(255, 255, 255, 0.035);
+}
+
+.saturn-superadmin-console {
+  min-height: calc(100svh - 5.8rem);
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-bg-raised);
+  box-shadow: var(--admin-shadow);
+  overflow: clip;
+}
+
+.saturn-superadmin-workbench {
+  grid-template-columns: 14.5rem minmax(0, 1fr);
+}
+
+.saturn-superadmin-primary-nav {
+  top: 5.2rem;
+  gap: 0.45rem;
+  border-right: 1px solid var(--admin-border);
+  background: #141719;
+  padding: 0.75rem;
+}
+
+.saturn-superadmin-primary-nav__brand {
+  position: relative;
+  gap: 0.1rem;
+  margin-bottom: 0.35rem;
+  padding: 0.55rem 0.55rem 0.85rem 2.8rem;
+}
+
+.saturn-superadmin-primary-nav__brand::before {
+  content: "S";
+  position: absolute;
+  top: 0.45rem;
+  left: 0.45rem;
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid var(--admin-accent-border);
+  border-radius: 8px;
+  background: var(--admin-accent-bg);
+  color: var(--admin-accent-strong);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.saturn-superadmin-primary-nav button,
+.admin-sidebar-link,
+.admin-mobile-drawer__button,
+.super-admin-section-tabs__button,
+.super-admin-choice {
+  border-radius: 8px;
+  background: transparent;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.saturn-superadmin-primary-nav button {
+  min-height: 4rem;
+  padding: 0.78rem;
+}
+
+.saturn-superadmin-primary-nav button:hover,
+.saturn-superadmin-primary-nav button:focus-visible,
+.saturn-superadmin-primary-nav button.is-active,
+.admin-sidebar-link:hover,
+.admin-sidebar-link:focus-visible,
+.admin-sidebar-link.is-active,
+.admin-mobile-drawer__button.is-active,
+.super-admin-section-tabs__button.is-active,
+.super-admin-choice.is-selected {
+  border-color: var(--admin-accent-border);
+  background: var(--admin-accent-bg);
+  color: var(--admin-text);
+  outline: none;
+}
+
+.saturn-superadmin-main {
+  gap: 0.9rem;
+  padding: 0.9rem;
+}
+
+.saturn-superadmin-toolbar {
+  min-height: 3.4rem;
+  padding: 0 0.1rem;
+}
+
+.saturn-superadmin-toolbar h2 {
+  color: var(--admin-text);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.saturn-superadmin-toolbar p {
+  color: var(--admin-muted);
+}
+
+.saturn-superadmin-toolbar__actions {
+  align-items: center;
+}
+
+.super-admin-layout {
+  grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+  gap: 0.9rem;
+}
+
+.super-admin-panel,
+.dashboard-subpanel,
+.admin-sidebar-card,
+.admin-partners__catalogSurface,
+.super-admin-mobile-selector {
+  gap: 0.9rem;
+  padding: 1rem;
+}
+
+.super-admin-panel--directory {
+  top: 5.4rem;
+  max-height: calc(100dvh - 7rem);
+  background: #181c20;
+}
+
+.super-admin-dir-header {
+  gap: 0.65rem;
+  padding-bottom: 0.8rem;
+}
+
+.super-admin-dir-header h2,
+.dashboard-panel__header h2,
+.dashboard-subpanel__header h3,
+.admin-sidebar-card h2,
+.saturn-account-security__toolbar h2,
+.saturn-account-security__identity h2 {
+  color: var(--admin-text);
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.super-admin-dir-header p,
+.dashboard-subpanel__header p,
+.dashboard-subpanel__headerCopy p,
+.admin-sidebar-link small,
+.admin-partners__summaryItem p,
+.admin-partners__relationshipHeader p,
+.admin-partners__hint,
+.saturn-account-security__toolbar p,
+.saturn-account-security__identity p {
+  color: var(--admin-muted);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.super-admin-directory-search span {
+  color: var(--admin-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.super-admin-org-directory,
+.super-admin-detail,
+.super-admin-inspector-content,
+.admin-partners__relationshipList {
+  gap: 0.7rem;
+}
+
+.super-admin-org-card,
+.super-admin-account-card,
+.super-admin-security-device {
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-surface-subtle);
+  color: var(--admin-text);
+}
+
+.super-admin-org-card {
+  gap: 0.65rem;
+  padding: 0.9rem;
+}
+
+.super-admin-org-card:hover,
+.super-admin-org-card:focus-visible,
+.super-admin-org-card.is-selected,
+.super-admin-account-card:hover,
+.super-admin-account-card:focus-visible,
+.super-admin-account-card.is-selected {
+  border-color: var(--admin-accent-border);
+  background: var(--admin-accent-bg);
+  outline: none;
+}
+
+.super-admin-org-card.is-selected,
+.super-admin-account-card.is-selected {
+  box-shadow: inset 3px 0 0 var(--admin-accent);
+}
+
+.admin-account-card__chip,
+.super-admin-meta-pill,
+.admin-partners__chip {
+  min-height: 1.65rem;
+  border-color: var(--admin-border-strong);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--admin-label);
+  padding: 0.28rem 0.58rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.admin-account-card__chip--status-active,
+.admin-partners__chip--active,
+.super-admin-meta-pill--success {
+  border-color: rgba(99, 214, 148, 0.42);
+  background: rgba(99, 214, 148, 0.11);
+  color: #baf4cf;
+}
+
+.super-admin-meta-pill--warning,
+.admin-partners__chip--suspended,
+.admin-partners__chip--revoking {
+  border-color: var(--admin-feedback-border);
+  background: var(--admin-feedback-bg);
+  color: var(--admin-feedback-text);
+}
+
+.super-admin-focus-card {
+  gap: 0.7rem;
+  border: 1px solid var(--admin-accent-border);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(109, 211, 194, 0.14), rgba(109, 211, 194, 0.04)),
+    var(--admin-surface);
+  padding: 1rem;
+}
+
+.super-admin-focus-card__header h4 {
+  font-size: 1.1rem;
+}
+
+.super-admin-section-tabs {
+  gap: 0.3rem;
+  padding: 0.3rem;
+  border-color: var(--admin-border);
+  background: var(--admin-surface-subtle);
+}
+
+.super-admin-section-tabs__button {
+  min-height: 3rem;
+  border-color: transparent;
+  background: transparent;
+}
+
+.super-admin-inspector-shell {
+  grid-template-columns: minmax(220px, 255px) minmax(0, 1fr);
+  gap: 0.9rem;
+}
+
+.admin-partners__summaryItem,
+.admin-partners__relationshipCard,
+.saturn-account-security__rows article,
+.saturn-account-security__timeline article,
+.saturn-account-security__facts article {
+  background: var(--admin-surface-subtle);
+}
+
+.saturn-account-security__layout {
+  gap: 0.9rem;
+}
+
+.saturn-account-security__directory {
+  top: 5.4rem;
+  max-height: calc(100dvh - 7rem);
+}
+
+.super-admin-empty,
+.global-admin-empty {
+  min-height: 16rem;
+  border-color: var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-surface-subtle);
+  color: var(--admin-muted);
+}
+
+.modal-overlay {
+  background: rgba(5, 7, 9, 0.68);
+  backdrop-filter: blur(8px);
+}
+
+.modal {
+  border-color: var(--admin-border-strong);
+  border-radius: 8px;
+  background: var(--admin-surface-strong);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.48);
+}
+
+.modal__body {
+  padding: 1.25rem;
+}
+
+.modal-close {
+  border-radius: 8px;
+}
+
+.saturn-superadmin-toast {
+  border-color: var(--admin-border-strong);
+  border-left: 3px solid var(--admin-accent);
+  border-radius: 8px;
+  background: var(--admin-surface-strong);
+}
+
+.global-admin-console {
+  gap: 0.9rem;
+}
+
+.global-admin-sidebar,
+.global-admin-workspace,
+.global-admin-detail {
+  gap: 0.9rem;
+}
+
+.global-admin-list button {
+  border-color: var(--admin-border);
+  border-radius: 8px;
+  background: var(--admin-surface-subtle);
+  color: var(--admin-text);
+}
+
+.global-admin-list button:hover,
+.global-admin-list button:focus-visible,
+.global-admin-list button.is-active {
+  border-color: var(--admin-accent-border);
+  background: var(--admin-accent-bg);
+  outline: none;
+}
+
+@media (max-width: 980px) {
+  .global-admin-page--app {
+    width: min(100% - 1rem, 1760px);
+    padding-top: 0.5rem;
+  }
+
+  .global-admin-page--app .global-admin-header,
+  .global-admin-header__session,
+  .saturn-superadmin-toolbar {
+    align-items: stretch;
+  }
+
+  .global-admin-header__session {
+    justify-content: space-between;
+  }
+
+  .global-admin-header__user {
+    max-width: none;
+  }
+
+  .saturn-superadmin-workbench,
+  .super-admin-layout,
+  .saturn-account-security__layout,
+  .super-admin-inspector-shell,
+  .admin-partners__summaryList--metrics,
+  .saturn-account-security__facts,
+  .super-admin-modal__grid--two,
+  .super-admin-choiceRow,
+  .admin-partners__relationshipForm {
+    grid-template-columns: 1fr;
+  }
+
+  .saturn-superadmin-primary-nav {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--admin-border);
+  }
+
+  .saturn-superadmin-primary-nav__brand {
+    grid-column: 1 / -1;
+  }
+
+  .global-admin-tabs {
+    width: 100%;
+  }
+
+  .super-admin-panel--directory,
+  .saturn-account-security__directory {
+    position: static;
+    max-height: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .global-admin-page--app .global-admin-header,
+  .global-admin-header__session,
+  .global-admin-toolbar,
+  .saturn-superadmin-toolbar {
+    display: grid;
+  }
+
+  .global-admin-header__brand {
+    align-items: flex-start;
+  }
+
+  .super-admin-section-tabs,
+  .saturn-superadmin-primary-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .global-admin-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .saturn-superadmin-main,
+  .saturn-superadmin-primary-nav,
+  .super-admin-panel,
+  .dashboard-subpanel,
+  .admin-sidebar-card {
+    padding: 0.75rem;
+  }
+
+  .saturn-superadmin-toolbar__actions,
+  .super-admin-dir-actions,
+  .dashboard-subpanel__headerActions,
+  .admin-partners__catalogActions,
+  .admin-partners__formActions,
+  .super-admin-danger-zone__actions,
+  .super-admin-focus-card__facts,
+  .admin-partners__capabilities,
+  .admin-partners__chipList,
+  .super-admin-modal__actions,
+  .super-admin-modal__sectionActions {
+    width: 100%;
+  }
+
+  .saturn-superadmin-toolbar__actions > *,
+  .super-admin-dir-actions > *,
+  .dashboard-subpanel__headerActions > *,
+  .admin-partners__formActions > *,
+  .super-admin-danger-zone__actions > *,
+  .super-admin-modal__actions > * {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .global-admin-page--app {
+    width: 100%;
+    padding: 0.5rem 0.5rem 1rem;
+  }
+
+  .global-admin-page--app .global-admin-header {
+    position: static;
+    gap: 0.65rem;
+    margin-bottom: 0.55rem;
+    padding: 0.6rem;
+  }
+
+  .global-admin-header__brand {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.55rem;
+  }
+
+  .global-admin-header__mark {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .global-admin-page--app .global-admin-header h1 {
+    font-size: 0.92rem;
+  }
+
+  .global-admin-page--app .global-admin-header p,
+  .global-admin-header__user {
+    font-size: 0.74rem;
+  }
+
+  .global-admin-header__session {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.55rem;
+  }
+
+  .global-admin-header__session form {
+    flex: 0 0 auto;
+  }
+
+  .global-admin-ghost-button {
+    min-height: 2.25rem;
+    padding: 0 0.75rem;
+  }
+
+  .global-admin-system-switchbar {
+    display: block;
+    width: 100%;
+    margin: 0 0 0.55rem;
+  }
+
+  .global-admin-tabs {
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .global-admin-tabs button {
+    min-height: 2.35rem;
+  }
+
+  .saturn-superadmin-console {
+    min-height: auto;
+    border-radius: 8px;
+    box-shadow: none;
+  }
+
+  .saturn-superadmin-primary-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+    padding: 0.65rem;
+  }
+
+  .saturn-superadmin-primary-nav__brand {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 0.15rem 0 0.7rem 2.4rem;
+  }
+
+  .saturn-superadmin-primary-nav__brand::before {
+    top: 0;
+    left: 0;
+  }
+
+  .saturn-superadmin-primary-nav button {
+    min-height: 3.25rem;
+    padding: 0.65rem;
+  }
+
+  .saturn-superadmin-primary-nav button span {
+    font-size: 0.72rem;
+  }
+
+  .saturn-superadmin-main {
+    gap: 0.65rem;
+    padding: 0.65rem;
+  }
+
+  .saturn-superadmin-toolbar {
+    gap: 0.65rem;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .saturn-superadmin-toolbar h2 {
+    font-size: 1.25rem;
+  }
+
+  .saturn-superadmin-toolbar__actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+  }
+
+  .saturn-superadmin-toolbar__actions > * {
+    flex: initial;
+    width: 100%;
+  }
+
+  .super-admin-mobile-selector {
+    gap: 0.45rem;
+    padding: 0.75rem;
+  }
+
+  .super-admin-mobile-selector__select {
+    min-height: 2.4rem;
+  }
+
+  .super-admin-focus-card {
+    gap: 0.55rem;
+    padding: 0.8rem;
+  }
+
+  .super-admin-focus-card__header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.6rem;
+  }
+
+  .super-admin-focus-card__header h4 {
+    font-size: 1rem;
+  }
+
+  .super-admin-focus-card__facts {
+    gap: 0.4rem;
+  }
+
+  .admin-account-card__chip,
+  .super-admin-meta-pill,
+  .admin-partners__chip {
+    min-height: 1.55rem;
+    padding: 0.22rem 0.5rem;
+    font-size: 0.68rem;
+  }
+
+  .super-admin-section-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .super-admin-section-tabs__button {
+    min-height: 3.05rem;
+    border-color: var(--admin-border);
+    background: var(--admin-surface-subtle);
+  }
+
+  .super-admin-panel,
+  .dashboard-subpanel,
+  .admin-sidebar-card,
+  .admin-partners__catalogSurface,
+  .super-admin-modal__section {
+    gap: 0.75rem;
+    padding: 0.8rem;
+  }
+
+  .dashboard-subpanel__header,
+  .dashboard-panel__header,
+  .super-admin-dir-header,
+  .admin-partners__relationshipHeader {
+    gap: 0.5rem;
+  }
+
+  .admin-partners__summaryList,
+  .admin-partners__summaryList--metrics,
+  .super-admin-inspector-content,
+  .super-admin-detail {
+    gap: 0.6rem;
+  }
+
+  .admin-partners__summaryItem,
+  .admin-partners__relationshipCard {
+    padding: 0.8rem;
+  }
+
+  .global-admin-form button,
+  .global-admin-box button,
+  .global-admin-toolbar button,
+  .global-admin-inline-form button,
+  .dashboard-button,
+  .admin-partners__formActions button,
+  .modal-actions button {
+    min-height: 2.45rem;
+  }
+
+  .super-admin-empty,
+  .global-admin-empty {
+    min-height: 11rem;
+    padding: 1.25rem;
+  }
+}
+
 .section-shell {
   width: var(--content-width);
   margin: 0 auto;

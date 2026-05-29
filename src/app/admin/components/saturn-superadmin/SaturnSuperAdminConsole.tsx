@@ -34,6 +34,7 @@ export default function SaturnSuperAdminConsole() {
     "organizations",
   );
   const [organizations, setOrganizations] = useState<OrganizationSummary[]>([]);
+  const [directoryQuery, setDirectoryQuery] = useState("");
   const [selectedOrganizationId, setSelectedOrganizationId] = useState<string | null>(null);
   const selectedOrganizationIdRef = useRef<string | null>(null);
 
@@ -81,6 +82,12 @@ export default function SaturnSuperAdminConsole() {
   const activeOrganizationsCount = organizations.filter(
     (organization) => organization.is_active,
   ).length;
+  const visibleOrganizations = organizations.filter((organization) => {
+    const query = directoryQuery.trim().toLowerCase();
+    if (!query) return true;
+
+    return `${organization.name} ${organization.slug}`.toLowerCase().includes(query);
+  });
 
   useEffect(() => {
     selectedOrganizationIdRef.current = selectedOrganizationId;
@@ -588,87 +595,103 @@ export default function SaturnSuperAdminConsole() {
               </div>
 
               <div className="super-admin-layout">
-          <div className="super-admin-panel super-admin-panel--directory">
-            <div className="super-admin-dir-header">
-              <div>
-                <h2>Liste</h2>
-                <p>Sélectionnez une ligne pour ouvrir les actions.</p>
-              </div>
-            </div>
-
-            {organizationsStatus ? (
-              <DashboardInlineFeedback>{organizationsStatus}</DashboardInlineFeedback>
-            ) : null}
-
-            {loadingOrganizations ? (
-              <SuperAdminDirectorySkeleton includeHeader={false} />
-            ) : organizations.length === 0 ? (
-              <DashboardStateMessage
-                tone="info"
-                title="Aucune organisation"
-                description="Créez une organisation pour initialiser la plateforme."
-              />
-            ) : (
-              <div className="super-admin-org-directory">
-                {organizations.map((organization) => (
-                  <button
-                    key={organization.id}
-                    type="button"
-                    className={`super-admin-org-card${
-                      organization.id === selectedOrganizationId ? " is-selected" : ""
-                    }`}
-                    onClick={() => selectOrganization(organization.id)}
-                  >
-                    <div className="super-admin-org-card__top">
-                      <strong>{organization.name}</strong>
-                      <span
-                        className={`admin-account-card__chip admin-account-card__chip--status admin-account-card__chip--status-${
-                          organization.is_active ? "active" : "disabled"
-                        }`}
-                      >
-                        {organization.is_active ? "Active" : "Inactive"}
-                      </span>
+                <div className="super-admin-panel super-admin-panel--directory">
+                  <div className="super-admin-dir-header">
+                    <div>
+                      <h2>Liste</h2>
+                      <p>Sélectionnez une ligne pour ouvrir les actions.</p>
                     </div>
+                  </div>
 
-                    <div className="super-admin-org-card__meta">
-                      <span>{organization.slug}</span>
-                      <span>{renderOrganizationAdminCount(organization.admin_count)}</span>
+                  <label className="super-admin-directory-search">
+                    <span>Rechercher</span>
+                    <input
+                      type="search"
+                      value={directoryQuery}
+                      onChange={(event) => setDirectoryQuery(event.target.value)}
+                      placeholder="Nom ou slug"
+                    />
+                  </label>
+
+                  {organizationsStatus ? (
+                    <DashboardInlineFeedback>{organizationsStatus}</DashboardInlineFeedback>
+                  ) : null}
+
+                  {loadingOrganizations ? (
+                    <SuperAdminDirectorySkeleton includeHeader={false} />
+                  ) : organizations.length === 0 ? (
+                    <DashboardStateMessage
+                      tone="info"
+                      title="Aucune organisation"
+                      description="Créez une organisation pour initialiser la plateforme."
+                    />
+                  ) : visibleOrganizations.length === 0 ? (
+                    <DashboardStateMessage
+                      tone="info"
+                      title="Aucun résultat"
+                      description="Aucune organisation ne correspond à cette recherche."
+                    />
+                  ) : (
+                    <div className="super-admin-org-directory">
+                      {visibleOrganizations.map((organization) => (
+                        <button
+                          key={organization.id}
+                          type="button"
+                          className={`super-admin-org-card${
+                            organization.id === selectedOrganizationId ? " is-selected" : ""
+                          }`}
+                          onClick={() => selectOrganization(organization.id)}
+                        >
+                          <div className="super-admin-org-card__top">
+                            <strong>{organization.name}</strong>
+                            <span
+                              className={`admin-account-card__chip admin-account-card__chip--status admin-account-card__chip--status-${
+                                organization.is_active ? "active" : "disabled"
+                              }`}
+                            >
+                              {organization.is_active ? "Active" : "Inactive"}
+                            </span>
+                          </div>
+
+                          <div className="super-admin-org-card__meta">
+                            <span>{organization.slug}</span>
+                            <span>{renderOrganizationAdminCount(organization.admin_count)}</span>
+                          </div>
+                        </button>
+                      ))}
                     </div>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+                  )}
+                </div>
 
-          <SaturnSuperAdminInspector
-            organizations={organizations}
-            selectedOrganizationId={selectedOrganizationId}
-            selectedOrganization={selectedOrganization}
-            detail={detail}
-            loadingOrganizations={loadingOrganizations}
-            loadingDetail={loadingDetail}
-            detailStatus={detailStatus}
-            logisticsModeDraft={logisticsModeDraft}
-            savingLogisticsMode={savingLogisticsMode}
-            logisticsModeStatus={logisticsModeStatus}
-            adminMode={adminMode}
-            adminEmail={adminEmail}
-            adminPassword={adminPassword}
-            adminFirstName={adminFirstName}
-            adminLastName={adminLastName}
-            adminStatus={adminStatus}
-            savingAdmin={savingAdmin}
-            savingCompany={savingCompany}
-            onOpenHardDeleteModal={openHardDeleteModal}
-            onSelectOrganization={selectOrganization}
-            onLogisticsModeChange={setLogisticsModeDraft}
-            onSaveLogisticsMode={handleSaveLogisticsMode}
-            onAdminModeChange={setAdminMode}
-            onAdminFieldChange={updateAdminField}
-            onSaveAdmin={handleSaveAdmin}
-            onCreateCompany={handleCreateCompany}
-          />
-            </div>
+                <SaturnSuperAdminInspector
+                  organizations={organizations}
+                  selectedOrganizationId={selectedOrganizationId}
+                  selectedOrganization={selectedOrganization}
+                  detail={detail}
+                  loadingOrganizations={loadingOrganizations}
+                  loadingDetail={loadingDetail}
+                  detailStatus={detailStatus}
+                  logisticsModeDraft={logisticsModeDraft}
+                  savingLogisticsMode={savingLogisticsMode}
+                  logisticsModeStatus={logisticsModeStatus}
+                  adminMode={adminMode}
+                  adminEmail={adminEmail}
+                  adminPassword={adminPassword}
+                  adminFirstName={adminFirstName}
+                  adminLastName={adminLastName}
+                  adminStatus={adminStatus}
+                  savingAdmin={savingAdmin}
+                  savingCompany={savingCompany}
+                  onOpenHardDeleteModal={openHardDeleteModal}
+                  onSelectOrganization={selectOrganization}
+                  onLogisticsModeChange={setLogisticsModeDraft}
+                  onSaveLogisticsMode={handleSaveLogisticsMode}
+                  onAdminModeChange={setAdminMode}
+                  onAdminFieldChange={updateAdminField}
+                  onSaveAdmin={handleSaveAdmin}
+                  onCreateCompany={handleCreateCompany}
+                />
+              </div>
             </>
           )}
         </div>

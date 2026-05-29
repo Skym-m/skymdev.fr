@@ -14,16 +14,22 @@ export default async function SuperAdminPage() {
   return (
     <main className="global-admin-page global-admin-page--app">
       <header className="global-admin-header">
-        <div>
-          <h1>Superadmin SkymDev</h1>
-          <p>{userLabel}</p>
+        <div className="global-admin-header__brand">
+          <span className="global-admin-header__mark" aria-hidden="true">S</span>
+          <div>
+            <h1>Superadmin SkymDev</h1>
+            <p>Console globale</p>
+          </div>
         </div>
 
-        <form action={signOutSuperAdmin}>
-          <button className="global-admin-ghost-button" type="submit">
-            Déconnexion
-          </button>
-        </form>
+        <div className="global-admin-header__session">
+          <span className="global-admin-header__user">{userLabel}</span>
+          <form action={signOutSuperAdmin}>
+            <button className="global-admin-ghost-button" type="submit">
+              Déconnexion
+            </button>
+          </form>
+        </div>
       </header>
 
       <SuperAdminPanel
