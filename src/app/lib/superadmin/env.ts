@@ -1,3 +1,5 @@
+import { createHmac } from "node:crypto";
+
 export type SuperAdminSystemId = "saturn" | "mercury";
 
 type RemoteSystemConfig = {
@@ -26,6 +28,8 @@ function readOptionalEnv(name: string): string | null {
 // refuse to start with a weak or placeholder value so a misconfiguration can
 // never ship a guessable secret. Saturn enforces the same floor on its side.
 const SERVICE_TOKEN_MIN_LENGTH = 32;
+const SATURN_ROLLING_TOKEN_CONTEXT = "saturn-superadmin:v1";
+const SATURN_ROLLING_TOKEN_TIME_ZONE = "Europe/Paris";
 const WEAK_SERVICE_TOKENS = new Set([
   "change-me",
   "changeme",
@@ -53,6 +57,70 @@ function readServiceToken(name: string): string {
   return value;
 }
 
+function assertStrongServiceSecret(name: string, value: string): void {
+  if (
+    value.length < SERVICE_TOKEN_MIN_LENGTH ||
+    WEAK_SERVICE_TOKENS.has(value.toLowerCase())
+  ) {
+    throw new Error(
+      `${name} must be a strong random secret (>= ${SERVICE_TOKEN_MIN_LENGTH} chars, non-placeholder) in production.`,
+    );
+  }
+}
+
+function getParisDateParts(date: Date): {
+  year: number;
+  month: number;
+  day: number;
+} {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: SATURN_ROLLING_TOKEN_TIME_ZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+
+  const byType = new Map(parts.map((part) => [part.type, part.value]));
+  return {
+    year: Number(byType.get("year")),
+    month: Number(byType.get("month")),
+    day: Number(byType.get("day")),
+  };
+}
+
+function getParisWeekStartKey(date: Date): string {
+  const parts = getParisDateParts(date);
+  const localDateUtc = Date.UTC(parts.year, parts.month - 1, parts.day);
+  const localDay = new Date(localDateUtc).getUTCDay();
+  const daysSinceMonday = (localDay + 6) % 7;
+  const weekStartUtc = localDateUtc - daysSinceMonday * 24 * 60 * 60 * 1000;
+
+  return new Date(weekStartUtc).toISOString().slice(0, 10);
+}
+
+function deriveSaturnWeeklyServiceToken(seed: string): string {
+  return createHmac("sha256", seed)
+    .update(
+      `${SATURN_ROLLING_TOKEN_CONTEXT}:${getParisWeekStartKey(new Date())}`,
+    )
+    .digest("base64url");
+}
+
+function readSaturnServiceToken(): string {
+  const rollingSeed = readOptionalEnv("SATURN_SUPERADMIN_SERVICE_TOKEN_SEED");
+  if (rollingSeed) {
+    if (process.env.NODE_ENV === "production") {
+      assertStrongServiceSecret(
+        "SATURN_SUPERADMIN_SERVICE_TOKEN_SEED",
+        rollingSeed,
+      );
+    }
+    return deriveSaturnWeeklyServiceToken(rollingSeed);
+  }
+
+  return readServiceToken("SATURN_SUPERADMIN_SERVICE_TOKEN");
+}
+
 function normalizeBaseUrl(value: string, name: string): string {
   let url: URL;
   try {
@@ -66,8 +134,13 @@ function normalizeBaseUrl(value: string, name: string): string {
   }
 
   const isLocalhost =
-    url.hostname === "localhost" || url.hostname === "127.0.0.1" || url.hostname === "::1";
-  if (url.protocol !== "https:" && (process.env.NODE_ENV === "production" || !isLocalhost)) {
+    url.hostname === "localhost" ||
+    url.hostname === "127.0.0.1" ||
+    url.hostname === "::1";
+  if (
+    url.protocol !== "https:" &&
+    (process.env.NODE_ENV === "production" || !isLocalhost)
+  ) {
     throw new Error(`${name} must use HTTPS outside local development.`);
   }
 
@@ -105,13 +178,16 @@ export function getNeonAuthCookieSecret(): string {
 
 export function isNeonAuthConfigured(): boolean {
   return Boolean(
-    readOptionalEnv("NEON_AUTH_BASE_URL") && readOptionalEnv("NEON_AUTH_COOKIE_SECRET"),
+    readOptionalEnv("NEON_AUTH_BASE_URL") &&
+    readOptionalEnv("NEON_AUTH_COOKIE_SECRET"),
   );
 }
 
 // Authorization allowlist. Neon Auth proves *who* a user is; this decides *who*
 // is a super-admin. Fail-closed: with no allowlist, nobody is authorized.
-export function isSuperAdminEmailAllowed(email: string | null | undefined): boolean {
+export function isSuperAdminEmailAllowed(
+  email: string | null | undefined,
+): boolean {
   if (!email) {
     return false;
   }
@@ -140,7 +216,8 @@ export function getLocalSuperAdminCredentials(): {
     return null;
   }
 
-  const email = readOptionalEnv("SUPERADMIN_LOCAL_EMAIL")?.toLowerCase() ?? null;
+  const email =
+    readOptionalEnv("SUPERADMIN_LOCAL_EMAIL")?.toLowerCase() ?? null;
   const password = readOptionalEnv("SUPERADMIN_LOCAL_PASSWORD");
   const sessionSecret = readOptionalEnv("SUPERADMIN_LOCAL_SESSION_SECRET");
 
@@ -149,7 +226,9 @@ export function getLocalSuperAdminCredentials(): {
   }
 
   if (sessionSecret.length < 32) {
-    throw new Error("SUPERADMIN_LOCAL_SESSION_SECRET must be at least 32 characters.");
+    throw new Error(
+      "SUPERADMIN_LOCAL_SESSION_SECRET must be at least 32 characters.",
+    );
   }
 
   return {
@@ -172,7 +251,7 @@ export function getRemoteSystemConfig(systemId: string): RemoteSystemConfig {
         readRequiredEnv("SATURN_API_BASE_URL"),
         "SATURN_API_BASE_URL",
       ),
-      serviceToken: readServiceToken("SATURN_SUPERADMIN_SERVICE_TOKEN"),
+      serviceToken: readSaturnServiceToken(),
     };
   }
 
@@ -191,7 +270,9 @@ export function getRemoteSystemConfig(systemId: string): RemoteSystemConfig {
   throw new Error("UNKNOWN_SUPERADMIN_SYSTEM");
 }
 
-export function getConfiguredSystems(): Array<Pick<RemoteSystemConfig, "id" | "label">> {
+export function getConfiguredSystems(): Array<
+  Pick<RemoteSystemConfig, "id" | "label">
+> {
   const systems: Array<Pick<RemoteSystemConfig, "id" | "label">> = [
     {
       id: "saturn",
