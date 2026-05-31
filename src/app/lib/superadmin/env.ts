@@ -88,21 +88,19 @@ function getParisDateParts(date: Date): {
   };
 }
 
-function getParisWeekStartKey(date: Date): string {
+// Period key = Europe/Paris calendar day (YYYY-MM-DD), rolling at local
+// midnight. Must stay byte-for-byte identical to Saturn's getParisDayKey so
+// both sides derive the same daily token.
+function getParisDayKey(date: Date): string {
   const parts = getParisDateParts(date);
   const localDateUtc = Date.UTC(parts.year, parts.month - 1, parts.day);
-  const localDay = new Date(localDateUtc).getUTCDay();
-  const daysSinceMonday = (localDay + 6) % 7;
-  const weekStartUtc = localDateUtc - daysSinceMonday * 24 * 60 * 60 * 1000;
 
-  return new Date(weekStartUtc).toISOString().slice(0, 10);
+  return new Date(localDateUtc).toISOString().slice(0, 10);
 }
 
-function deriveSaturnWeeklyServiceToken(seed: string): string {
+function deriveSaturnRollingServiceToken(seed: string): string {
   return createHmac("sha256", seed)
-    .update(
-      `${SATURN_ROLLING_TOKEN_CONTEXT}:${getParisWeekStartKey(new Date())}`,
-    )
+    .update(`${SATURN_ROLLING_TOKEN_CONTEXT}:${getParisDayKey(new Date())}`)
     .digest("base64url");
 }
 
@@ -115,7 +113,7 @@ function readSaturnServiceToken(): string {
         rollingSeed,
       );
     }
-    return deriveSaturnWeeklyServiceToken(rollingSeed);
+    return deriveSaturnRollingServiceToken(rollingSeed);
   }
 
   return readServiceToken("SATURN_SUPERADMIN_SERVICE_TOKEN");
